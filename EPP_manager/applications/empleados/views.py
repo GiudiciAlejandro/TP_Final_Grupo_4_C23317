@@ -30,7 +30,12 @@ def employee_details(request, employee):
         'status': 'Active'
     }
     
-    context={"empleado":employee_1}
+    epp_1=[{'type':'Casco', 'serial_number':'csc1234', 'manufacturer':'MSA', 'asign_date':'12-4-2022'},{'type':'Anteojos', 'serial_number':'antdd53234', 'manufacturer':'North', 'asign_date':'30-1-2021'},
+    {'type':'Zapatos', 'serial_number':'boots1234', 'manufacturer':'Honeywell', 'asign_date':'2-8-2009'}]
+    
+
+    context={"empleado":employee_1, 
+             "epps":epp_1}
     return render(request,'employee/employee_details.html', context )
     
 

@@ -19,5 +19,15 @@
         <p>Mobile number: {{empleado.mobile_n}} </p>
         <p>status: {{empleado.status}} </p>
     </section>
+    <h2>Assigned EPPs</h2>
+    <section>
+        {% for ep in epps %}
+            <p><b>Type: </b> {{ep.type}} </p>
+            <p><b>Serial number: </b> {{ep.serial_number}} </p>
+            <p><b>Manufacturer: </b> {{ep.manufacturer}} </p>
+            <p><b>Assigment date: </b> {{ep.asign_date}} </p>
+            <p><b>--------------------------------------------- </b>  </p>
+        {% endfor%}
+    </section>
 </body>
 </html>
