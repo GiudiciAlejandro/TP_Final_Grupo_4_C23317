@@ -1,0 +1,85 @@
+html, body{
+    height:100%;
+    margin:0;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+    
+}
+.navbar
+{
+    background-color: #494a49 !important;
+    padding: 10px;
+}
+
+#Logo{
+    border-radius: 10%;
+    padding-left: 10%;
+    margin-right: 10%;
+}
+.navbar ul li a{
+    color: white;
+    margin: 5px 0px 10px 10px;
+    text-transform: uppercase;
+    
+}
+
+.cabeza{
+    background-color:#494a49
+}
+
+.navbar ul li.active > a {
+    color: #f4f1f1;
+    font-weight: bold;
+    font-size: 25px;
+    border-left: 3px solid  #f4f1f1;;
+    border-radius: 40px;
+}
+#Contacto{
+    margin-left:900px;
+    color: #f4f1f1;
+    font-size: 15px;
+}
+#Contacto:hover{
+  color: #525352;
+  transform:scale(1.1) ;  
+}
+
+h3{
+    color: #f4f1f1;
+}
+  
+.main{
+        background: url("../images/Obrero.jpg");
+        background-repeat: no-repeat fixed center;
+        background-size:cover;
+        width: 100%;
+        height:100%;         
+    } 
+
+.card{
+    height: 370px;
+    margin-top:10%;
+    margin-left: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+a{
+    color: #f4f1f1;
+}
+
+#Boton{
+    align-self: center;
+}
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
