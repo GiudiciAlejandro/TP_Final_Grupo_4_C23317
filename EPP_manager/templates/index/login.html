@@ -1,0 +1,47 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+  <li><button class="dropdown-item" type="button">Login</button></li>
+  <li><button class="dropdown-item" type="button">Contacto</button></li>
+{% endblock %}
+  <!--Caja-->
+  {% block contenido %} 
+  <main class=main>
+    <div class="container">
+      <div class="d-flex justify-content-center h-100">
+        <div class="card">
+          <div class="card-header">
+            <h3>EPP-Manager</h3>
+            <form>
+              <!-- Usuario -->
+              <div class="form-outline mb-4">
+                <input type="usuario" id="formusuario" class="form-control form-control-lg" placeholder="Ingrese Usuario" />
+              </div>
+
+              <!-- Password -->
+              <div class="form-outline mb-4">
+                <input type="password" id="formPass" class="form-control form-control-lg"  placeholder="Ingrese Contraseña"/>
+              </div>
+
+              <!-- boton -->
+              <div style="text-align: center;">
+                <button type="submit" class="btn btn-dark btn-lg btn-block " >Ingresar</button>
+              </div>
+                <!--footer card-->
+              <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                  <a href="#">Registrate</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <a href="#">Olvidé mi contraseña</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% endblock %}

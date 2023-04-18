@@ -34,6 +34,9 @@ html, body{
     background-color:#494a49
 }
 
+
+
+
 .navbar ul li.active > a {
     color: #f4f1f1;
     font-weight: bold;
@@ -63,13 +66,6 @@ h3{
         height:100%;         
     } 
 
-.card{
-    height: 370px;
-    margin-top:10%;
-    margin-left: auto;
-    width: 400px;
-    background-color: rgba(0,0,0,0.5) !important;
-}
 
 a{
     color: #f4f1f1;
@@ -78,8 +74,32 @@ a{
 #Boton{
     align-self: center;
 }
+
 .login_btn:hover{
 color: black;
 background-color: white;
 }
 
+
+
+.descripcion{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+.card{
+    color: white;
+    height: auto;
+    margin-top:10%;
+    margin-left: auto;
+    width: 30%;
+    background-color: rgba(0,0,0,0.7) !important;
+    }
+
+.message{color: white;
+        height: auto;
+        margin-top:25%;
+        margin-left: auto;
+        width: 60%;
+        background-color: rgba(26, 73, 92, 0.7) !important;}

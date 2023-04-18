@@ -2,44 +2,18 @@
 {% load static %}
 
 {% block menus %}
-    <h1>----</h1>
+<!-- Menu items for landing page -->
+  <li><a class="dropdown-item"  href="{% url 'login' %}">Login</a></li>
+  <li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
 {% endblock %}
   <!--Caja-->
   {% block contenido %} 
   <main class=main>
-    <div class="container">
-      <div class="d-flex justify-content-center h-100">
-        <div class="card">
-          <div class="card-header">
-            <h3>EPP-Manager</h3>
-            <form>
-              <!-- Usuario -->
-              <div class="form-outline mb-4">
-                <input type="usuario" id="formusuario" class="form-control form-control-lg" placeholder="Ingrese Usuario" />
-              </div>
-
-              <!-- Password -->
-              <div class="form-outline mb-4">
-                <input type="password" id="formPass" class="form-control form-control-lg"  placeholder="Ingrese Contraseña"/>
-              </div>
-
-              <!-- boton -->
-              <div style="text-align: center;">
-                <button type="submit" class="btn btn-dark btn-lg btn-block " >Ingresar</button>
-              </div>
-                <!--footer card-->
-              <div class="card-footer">
-                <div class="d-flex justify-content-center links">
-                  <a href="#">Registrate</a>
-                </div>
-                <div class="d-flex justify-content-center">
-                  <a href="#">Olvidé mi contraseña</a>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div class="message">
+      <h3>EPP-Manager</h3>
+      <h4>EPP Manager es una aplicación simple y potente que le permitirá administrar los elementos de protección de personal de su empresa.
+          Puede administrar altas, bajas, fechas de vencimientos, inspecciones periódicas, asignaciones a personal a fin de mantener seguros a sus empleados.
+      </h4>
     </div>
   </main>
   {% endblock %}

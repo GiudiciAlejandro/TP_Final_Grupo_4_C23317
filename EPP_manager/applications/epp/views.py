@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+from django.urls import reverse
 
-# Create your views here.
+
+def epp_list(request):
+    pass
+
+def epp_new(request):
+    pass
