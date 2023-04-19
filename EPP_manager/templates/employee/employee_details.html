@@ -1,33 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPP Manager - Employee details</title>
-</head>
+
 <body>
-    <h1> Employee details </h1>
-    <section>
-        <p>Name: {{empleado.first_name}} </p>
-        <p>Last name: {{empleado.last_name}} </p>
-        <p>Age: {{empleado.age}} </p>
-        <p>Nacionality: {{empleado.nacionality}} </p>
-        <p>Company: {{empleado.company}} </p>
-        <p>Document type: {{empleado.document_type}} </p>
-        <p>Document number: {{empleado.document_number}} </p>
-        <p>Mobile number: {{empleado.mobile_n}} </p>
-        <p>status: {{empleado.status}} </p>
-    </section>
-    <h2>Assigned EPPs</h2>
-    <section>
-        {% for ep in epps %}
-            <p><b>Type: </b> {{ep.type}} </p>
-            <p><b>Serial number: </b> {{ep.serial_number}} </p>
-            <p><b>Manufacturer: </b> {{ep.manufacturer}} </p>
-            <p><b>Assigment date: </b> {{ep.asign_date}} </p>
-            <p><b>--------------------------------------------- </b>  </p>
-        {% endfor%}
-    </section>
 </body>
 </html>
+
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'login' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Detalle empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Revision de EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
+
+{% endblock %}
+  <!--Caja-->
+  {% block contenido %} 
+  <main class=main2>
+    <div class="row">
+      <div class="col-4">
+        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
+        <div class="row">
+          <div class="col-4">
+            <h5><span class="badge bg-secondary w-100">Name </span></h5>
+            <h5><span class="badge bg-secondary w-100">Last name </span></h5>
+            <h5><span class="badge bg-secondary w-100">Edad  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Nacionalidad  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Compañia </span></h5>
+            <h5><span class="badge bg-secondary w-100">Tipo de documento  </span></h5>
+            <h5><span class="badge bg-secondary w-100">N° de documento </span></h5>
+            <h5><span class="badge bg-secondary w-100">N° de telefono celular  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Estado  </span></h5>
+          </div>
+          <div class="col-4">
+            <h5><span class="badge bg-secondary">{{empleado.first_name}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.last_name}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.age}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.nacionality}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.company}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.document_type}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.document_number}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.mobile_n}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empleado.status}}  </span></h5>
+          </div>
+        </div>
+        <div>
+          <img class="img-fluid " src="{% static 'images/persona_con_epp.png' %}" alt="persona">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
+        {% for ep in epps %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+              <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
+              <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
+              <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+    <div> 
+  </main>
+  {% endblock %}
