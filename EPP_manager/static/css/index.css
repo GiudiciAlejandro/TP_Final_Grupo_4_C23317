@@ -67,8 +67,7 @@ h3{
     } 
 
 .main2{
-    margin-top: 100px;
-    background-color: #494a49;
+    background: url("../images/personacasco.webp");
     background-repeat: no-repeat fixed center;
     background-size:cover;
     width: 100%;
