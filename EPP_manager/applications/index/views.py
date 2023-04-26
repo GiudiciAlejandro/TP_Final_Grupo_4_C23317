@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from .forms import logeo
+
 
 # Create your views here.
 
@@ -14,15 +15,9 @@ def login(request):
         logeo_form=logeo(request.POST)
         # Validaciones
         if logeo_form.is_valid():
-            
-            #return redirect("index")
-
+            return redirect("/empleados/employee_details/ale")
     else:
         logeo_form=logeo()
-
-
-
-   # return super().method == "POST":
     context= {'form_logeo': logeo_form}
     return render(request,'index/login.html' , context)
         
