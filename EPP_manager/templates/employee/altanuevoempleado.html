@@ -1,0 +1,46 @@
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'login' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Detalle empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Revision de EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
+
+{% endblock %}
+  <!--Caja-->
+  {% block contenido %} 
+  <main class=main2>
+    <div class="row">
+      <div class="col-4">
+        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
+        <div class="row">
+          <div class="col-4">
+            <h5><span class="badge bg-secondary w-100">Name </span></h5>
+            <h5><span class="badge bg-secondary w-100">Apellido </span></h5>
+            <h5><span class="badge bg-secondary w-100">Empresa </span></h5>
+            <h5><span class="badge bg-secondary w-100">Nacionalidad  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Tipo de documento  </span></h5>
+            <h5><span class="badge bg-secondary w-100">N° de documento </span></h5>
+            <h5><span class="badge bg-secondary w-100">N° de telefono celular  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Comentario  </span></h5>
+          </div>
+          
+        </div>
+        <div>
+          <img class="img-fluid " src="{% static 'C:\Users\juanc\Documents\CodoACodoDjango\GitHub\TP_Final_Grupo_4_C23317\Presentaciones\png-transparent-hard-hats-architectural-engineering-construction-site-safety-helmet-hat-hat-building-general-contractor-thumbnail.png' %}" alt="casco">
+        </div>
+      </div>
+
+        {% endfor%}
+      </div>
+    <div> 
+  </main>
+  {% endblock %}
+
+
