@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
+from .form import BajaEmpleadoForm
+
 # Create your views here.
 
 
@@ -44,6 +46,14 @@ def employee_new(request):
     pass
 
 
-def employee_delete(employee):
+def baja_empleado(request):
+    Baja_Empleado= BajaEmpleadoForm()
+    context={'form': Baja_Empleado}
+
+    print(request.POST)
+    return render(request,'employee/BajaEmpleados.html', context )
+
+
+
     # Mark the selected employee as deleted in the DB
-    pass
+    

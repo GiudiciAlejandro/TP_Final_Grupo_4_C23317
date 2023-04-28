@@ -1,0 +1,34 @@
+
+{%extends 'employee/employee_details.html' %}
+
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'login' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Detalle empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Revision de EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
+{% endblock %}
+{% block page_title %} Baja de empleados{% endblock %}
+{% block contenido %}
+
+ <main class=main2>
+    <div class="row">
+      <div class="col-4">
+        <h2><span class="badge bg-secondary">Baja de empleado </span></h2>
+        <div class="row">
+          <div class="col-4">
+<form action="" method="POST">
+  
+   {% csrf_token %}
+   {{ form.as_p }}
+   <input type="submit">
+</form>
+
+
+{% endblock %}
+
