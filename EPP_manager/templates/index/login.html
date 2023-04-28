@@ -5,6 +5,8 @@
     {% comment %} <link rel="stylesheet" href="{% static 'aula_virtual/css/index.css' %}"> {% endcomment %}
 {% endblock %}
 
+{% block page_title %} Bienvenido {% endblock %}
+
 {% block menus %}
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
@@ -21,7 +23,7 @@
               {% csrf_token %}
               <!--user -->
               <div class="form-group row mb-2">
-                <div class="col-sm-3 col-form-label">
+                <div class="col-sm-4  logeo_labels">
                   {{ form_logeo.usuario.label }} 
                 </div>
                 <div class="col-sm-8">
@@ -30,7 +32,7 @@
               </div>
               <!-- Password -->
               <div class="form-group row mb-2">
-                <div class="col-sm-3 col-form-label">
+                <div class="col-sm-4 logeo_labels">
                   {{ form_logeo.password.label }}
                 </div>
                 <div class="col-sm-8">
