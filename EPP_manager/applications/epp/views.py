@@ -4,7 +4,10 @@ from django.urls import reverse
 
 
 def epp_list(request):
-    pass
+    return render(request,'epp/resume.html' )
 
 def epp_new(request):
     pass
+
+
+

@@ -15,7 +15,7 @@ def login(request):
         logeo_form=logeo(request.POST)
         # Validaciones
         if logeo_form.is_valid():
-            return redirect("/empleados/employee_details/ale")
+            return redirect("/epp/epp_list")
     else:
         logeo_form=logeo()
     context= {'form_logeo': logeo_form}
