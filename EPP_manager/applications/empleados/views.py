@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from .form import BajaEmpleadoForm
@@ -47,13 +47,25 @@ def employee_new(request):
 
 
 def baja_empleado(request):
-    Baja_Empleado= BajaEmpleadoForm()
+    if request.method=="POST":
+        Baja_Empleado=BajaEmpleadoForm(request.POST)
+
+        #Redirect
+        if Baja_Empleado.is_valid():
+            print(
+                Baja_Empleado.cleaned_data['Nombre'],
+                Baja_Empleado.cleaned_data['Apellido'],
+                Baja_Empleado.cleaned_data['DNI'])
+            return redirect("index")
+           
+    else:
+        Baja_Empleado=BajaEmpleadoForm()
+
     context={'form': Baja_Empleado}
+
 
     print(request.POST)
     return render(request,'employee/BajaEmpleados.html', context )
-
-
-
+    
     # Mark the selected employee as deleted in the DB
     

@@ -22,11 +22,12 @@
         <h2><span class="badge bg-secondary">Baja de empleado </span></h2>
         <div class="row">
           <div class="col-4">
+            
 <form action="" method="POST">
   
    {% csrf_token %}
    {{ form.as_p }}
-   <input type="submit">
+   <input type="submit" value="Guardar">
 </form>
 
 

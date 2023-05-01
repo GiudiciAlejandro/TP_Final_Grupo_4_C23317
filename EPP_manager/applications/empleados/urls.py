@@ -6,6 +6,7 @@ urlpatterns = [
     path('employee_details/<str:employee>/', views.employee_details, name='employee_details'), # show employee details with assigned EPPs
     path('employee_new/', views.employee_new, name='employee_new'),
     path('bajaEmpleado/', views.baja_empleado, name='baja') # Add an employee to the DB
+   
 
 ]
 
