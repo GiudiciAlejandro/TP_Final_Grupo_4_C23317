@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from .form import BajaEmpleadoForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -56,6 +57,8 @@ def baja_empleado(request):
                 Baja_Empleado.cleaned_data['Nombre'],
                 Baja_Empleado.cleaned_data['Apellido'],
                 Baja_Empleado.cleaned_data['DNI'])
+            
+            messages.add_message(request, messages.SUCCESS, 'El empleado se ha dado de baja correctamente', extra_tags='clase1' )
             return redirect("index")
            
     else:

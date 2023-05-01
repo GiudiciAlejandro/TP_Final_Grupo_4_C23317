@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+
 TOPIC_CHOICES = (
     ('Dni', 'Dni'),
     ('Pasaporte', 'Pasaporte'),
@@ -51,11 +52,5 @@ class BajaEmpleadoForm(forms.Form):
 
   
 
-   
-   #def clean_username(self):
-        #username = self.cleaned_data['username']
-        #if User.objects.filter(username=username).exists():
-            #raise forms.ValidationError("El nombre de usuario ya está en uso.")
-        #return username
-
+ 
    
