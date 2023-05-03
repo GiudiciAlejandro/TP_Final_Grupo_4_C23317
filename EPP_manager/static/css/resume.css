@@ -20,7 +20,7 @@
 }
 
 #assigned{
-    visibility: visible;
+    visibility:initial;
     position: absolute;
 }
 
