@@ -1,4 +1,4 @@
-{% extends 'base/base1.html' %}
+{% extends 'employee/employee_details.html' %}
 {% load static %}
 
 {% block menus %}
@@ -13,15 +13,17 @@
 <li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
 
 {% endblock %}
+{% block page_title %} Alta de Empleado {% endblock%}
+{% block contenido%}
   <!--Caja-->
-  {% block contenido %} 
+
   <main class=main2>
     <div class="row">
       <div class="col-4">
         <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
         <div class="row">
           <div class="col-4">
-            <h5><span class="badge bg-secondary w-100">Name </span></h5>
+            <h5><span class="badge bg-secondary w-100">Nombre </span></h5>
             <h5><span class="badge bg-secondary w-100">Apellido </span></h5>
             <h5><span class="badge bg-secondary w-100">Empresa </span></h5>
             <h5><span class="badge bg-secondary w-100">Nacionalidad  </span></h5>
@@ -33,11 +35,11 @@
           
         </div>
         <div>
-          <img class="img-fluid " src="{% static 'C:\Users\juanc\Documents\CodoACodoDjango\GitHub\TP_Final_Grupo_4_C23317\Presentaciones\png-transparent-hard-hats-architectural-engineering-construction-site-safety-helmet-hat-hat-building-general-contractor-thumbnail.png' %}" alt="casco">
+          <img class="img-fluid " src=".\casco.png" alt="casco">
         </div>
       </div>
 
-        {% endfor%}
+      
       </div>
     <div> 
   </main>

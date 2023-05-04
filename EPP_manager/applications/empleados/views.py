@@ -47,3 +47,10 @@ def employee_new(request):
 def employee_delete(employee):
     # Mark the selected employee as deleted in the DB
     pass
+
+def alta_empleado(request):
+    
+    context={}
+
+    print(request.POST)
+    return render(request,'employee/altanuevoempleado.html', context )
