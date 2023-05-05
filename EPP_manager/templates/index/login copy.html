@@ -1,12 +1,6 @@
 {% extends 'base/base1.html' %}
 {% load static %}
 
-{% block extra_css %}
-    {% comment %} <link rel="stylesheet" href="{% static 'aula_virtual/css/index.css' %}"> {% endcomment %}
-{% endblock %}
-
-{% block page_title %} Bienvenido {% endblock %}
-
 {% block menus %}
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
@@ -19,32 +13,22 @@
         <div class="card">
           <div class="card-header">
             <h3>EPP-Manager</h3>
-            <form action="" method="POST">
-              {% csrf_token %}
-              <!--user -->
-              <div class="form-group row mb-2">
-                <div class="col-sm-4  logeo_labels">
-                  {{ form_logeo.usuario.label }} 
-                </div>
-                <div class="col-sm-8">
-                  {{ form_logeo.usuario }}
-                </div>
+            <form>
+              <!-- Usuario -->
+              <div class="form-outline mb-4">
+                <input type="usuario" id="formusuario" class="form-control form-control-lg" placeholder="Ingrese Usuario" />
               </div>
+
               <!-- Password -->
-              <div class="form-group row mb-2">
-                <div class="col-sm-4 logeo_labels">
-                  {{ form_logeo.password.label }}
-                </div>
-                <div class="col-sm-8">
-                  {{ form_logeo.password }}
-                </div>
+              <div class="form-outline mb-4">
+                <input type="password" id="formPass" class="form-control form-control-lg"  placeholder="Ingrese Contraseña"/>
               </div>
-              
+
               <!-- boton -->
               <div style="text-align: center;">
                 <button type="submit" class="btn btn-dark btn-lg btn-block " >Ingresar</button>
               </div>
-              <!--footer card-->
+                <!--footer card-->
               <div class="card-footer">
                 <div class="d-flex justify-content-center links">
                   <a href="#">Registrate</a>

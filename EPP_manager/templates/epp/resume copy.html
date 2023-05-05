@@ -1,0 +1,183 @@
+
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/resume.js' %}">
+    </script>
+{% endblock %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'login' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Detalle empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Revision de EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
+
+{% endblock %}
+
+{% block page_title %} Resumen de EPPs {% endblock %}
+{% block contenido %} 
+<main class=main_resumen>
+  <div class="row">
+    <!--Main button section-->
+    <div class="col-4">
+      <div class="row">
+        <div class="col-4">
+          <!-- Free column to free space at left-->
+        </div>
+        <div class="col-6">
+          <div class="indicador">
+            <button type="button" class="btn btn-secondary position-relative" onclick="fn_in_stock()">
+              En stok
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                991+
+              </span>
+            </button>
+          </div>
+          <div class="indicador">
+            <button type="button" class="btn btn-secondary position-relative" onclick="fn_assigned()">
+              Asignados
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                991+
+              </span>
+            </button>
+          </div>
+          <div class="indicador">
+            <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_inspect()">
+              Proximas inspecciones
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                991+
+              </span>
+            </button>
+          </div>
+          <div class="indicador">
+            <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_expire()">
+              Próximos a vencer
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                991+
+              </span>
+            </button>
+          </div>
+          <div class="indicador">
+            <button type="button" class="btn btn-secondary position-relative" onclick="fn_employees()">
+              Total empleados 
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                991+
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- Right section to show detail for every button -->
+    
+      <div class="col-4 resumen" id="in_stock">
+          {% for ep in in_stock %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+              <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
+              <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
+              <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+
+      <div class="col-4 resumen" id="assigned">
+          {% for assig in assigned %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+              <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{assig.type}}</span></h5>
+              <h5><span class="badge bg-secondary">{{assig.serial_number}}  </span></h5>
+              <h5><span class="badge bg-secondary">{{assig.manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{assig.asign_date}} </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+
+
+      <div class="col-4 resumen" id="to_expire">
+          {% for exp in to_expire %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+              <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{exp.type}}</span></h5>
+              <h5><span class="badge bg-secondary">{{exp.serial_number}}  </span></h5>
+              <h5><span class="badge bg-secondary">{{exp.manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{exp.asign_date}} </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+
+      <div class="col-4 resumen" id="to_inspect">
+          {% for insp in to_inspect %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+              <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{insp.type}}</span></h5>
+              <h5><span class="badge bg-secondary">{{insp.serial_number}}  </span></h5>
+              <h5><span class="badge bg-secondary">{{insp.manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{insp.asign_date}} </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+
+      <div class="col-4 resumen" id="employees">
+          {% for empl in employees %}
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Nombre </span></h5>
+              <h5><span class="badge bg-secondary w-100">Apellido </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary">{{empl.name}}</span></h5>
+              <h5><span class="badge bg-secondary">{{empl.surname}}  </span></h5>
+            </div>
+          </div>
+          <p><b>---------------------------------------------------------------------- </b>  </p>
+        {% endfor%}
+      </div>
+  </div> 
+</main>
+{% endblock %}
+  
+  

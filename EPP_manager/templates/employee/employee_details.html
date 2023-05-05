@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d69e001b4a3a10360f1c1e792ac3cbfdbc8eb054
 {% extends 'base/base1.html' %}
 {% load static %}
 
@@ -13,6 +18,8 @@
 <li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
 
 {% endblock %}
+
+{% block page_title %} Listado de empleados y EPPs {% endblock %}
   <!--Caja-->
   {% block contenido %} 
   <main class=main2>
@@ -42,9 +49,6 @@
             <h5><span class="badge bg-secondary">{{empleado.mobile_n}}  </span></h5>
             <h5><span class="badge bg-secondary">{{empleado.status}}  </span></h5>
           </div>
-        </div>
-        <div>
-          <img class="img-fluid " src="{% static 'images/persona_con_epp.png' %}" alt="persona">
         </div>
       </div>
 

@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'EPP_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'EPP_manager',
+        'USER': 'postgre',
+        'PASSWORD': 'Alejandro',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
