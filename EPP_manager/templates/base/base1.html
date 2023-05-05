@@ -13,7 +13,9 @@
     />
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
     {% block extra_css %} {% endblock %}
+
     <title>EPP Manager</title>
   </head>
   <body>
@@ -56,9 +58,11 @@
             {% block menus %} {% endblock %}
           </ul>
         </div>
+        <hr class="separador" size="2px"/> 
       </nav>
+      
     </header>
-
+    
     <!--Caja-->
     
     {% block contenido %} {% endblock %}
@@ -67,12 +71,11 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     >
-  </script>
-  {% block scripts %} {% endblock %}
+    </script>
+    {% block scripts %} {% endblock %}
     
   </body>
   <footer>
-
     <div class="footer text-black text-center">
       <p>Copyright Group 4 Comision 23317. All rights reserved</p>
     </div>

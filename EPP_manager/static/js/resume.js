@@ -13,6 +13,7 @@ function fn_in_stock() {
     obj_to_inspect.style.display = 'none';
     obj_employees.style.display = 'none';
 
+
 }
 
 function fn_assigned() {
@@ -72,8 +73,6 @@ function fn_employees() {
     obj_to_expire.style.display = 'none';
     obj_to_inspect.style.display = 'none';
     obj_employees.style.display = 'block';
+  
 }
 
-window.onload = function() {
-    fn_in_stock();
-  };

@@ -2,15 +2,18 @@ html{
     height: 100%;
 }
 
+
 .indicador{
     margin-top: 20px;
 }
+
+
 
 .main_resumen{
     background-color: rgb(44, 44, 43);
     background-repeat: no-repeat fixed center;
     background-size:cover;
-
+    
         
 }
 

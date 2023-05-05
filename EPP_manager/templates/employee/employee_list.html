@@ -4,11 +4,11 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/empleados.css' %}"> 
 {% endblock %}
 
 {% block menus %}
-<!-- Menu items for landing page -->
+<!-- Menu items  -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
 <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
@@ -18,12 +18,14 @@
 
 {% endblock %}
 
-{% block page_title %} Detalle de empleado {% endblock %}
+{% block page_title %} Listado de empleados y EPPs {% endblock %}
   <!--Caja-->
   {% block contenido %} 
   <main class=main_resumen>
     <div class="row">
-      <div class="col-4">
+      {% for empl in empleados %}
+      <!--Repeat for every employee-->
+      <div class="col-6">
         <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
         <div class="row">
           <div class="col-4">
@@ -36,27 +38,25 @@
             <h5><span class="badge bg-secondary w-100">N° de documento </span></h5>
             <h5><span class="badge bg-secondary w-100">email  </span></h5>
             <h5><span class="badge bg-secondary w-100">Estado  </span></h5>
-            <button type="button" class="btn btn-primary position-relative" onclick="">
-              Asignar nuevo EPP
-            </button>
           </div>
           <div class="col-4">
-            <h5><span class="badge bg-secondary">{{empleado.first_name}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.last_name}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.age}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.nacionality}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.company}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.document_type}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.document_number}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.email}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.status}}  </span></h5>
+            <a href={{empl.linkto}}  class="btn btn-success btn-sm" tabindex="-1" role="button" >{{empl.first_name}}</a>
+            <h5><span class="badge bg-secondary">{{empl.last_name}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.age}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.nacionality}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.company}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.document_type}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.document_number}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.email}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.status}}  </span></h5>
           </div>
         </div>
       </div>
 
-      <div class="col-4">
-        <h2><span class="badge bg-secondary">EPPs Asignados</span></h2>
+      <div class="col-6">
+        <h2><span class="badge bg-secondary">EPPs Asignados </span></h2>
         {% for ep in epps %}
+        <!--Repeat for every epp for every employee-->
           <div class="row">
             <div class="col-4">
               <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
@@ -70,13 +70,12 @@
               <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
               <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
             </div>
-            <button type="button" class="btn btn-danger position-relative" onclick="">
-              Desasignar EPP
-            </button>
           </div>
-          <p class="textos"><b>---------------------------------------------------------------------------------------------- </b>  </p>
+          <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
         {% endfor%}
       </div>
+      <hr class="textos" size="2px"/> 
+      {% endfor%}
     <div> 
   </main>
   {% endblock %}

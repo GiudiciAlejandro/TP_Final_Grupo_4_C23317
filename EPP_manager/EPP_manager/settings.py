@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'EPP_manager',
-        'USER': 'postgre',
+        'USER': 'postgres',
         'PASSWORD': 'Alejandro',
         'HOST': '127.0.0.1',
         'PORT': '5432',

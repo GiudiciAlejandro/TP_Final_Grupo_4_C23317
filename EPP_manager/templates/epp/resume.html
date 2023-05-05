@@ -12,19 +12,17 @@
 {% endblock %}
 
 {% block menus %}
-<!-- Menu items for landing page -->
-<li><a class="dropdown-item"  href="{% url 'login' %}">Lista de empleados</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Detalle empleado</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo empleado</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">EPP en stock</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Nuevo EPP</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Revision de EPP</a></li>
+<!-- Menu items  -->
+<li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
 <li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Contacto</a></li>
-
+<li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
 {% endblock %}
 
 {% block page_title %} Resumen de EPPs {% endblock %}
+
 {% block contenido %} 
 <main class=main_resumen>
   <div class="row">
@@ -97,7 +95,7 @@
                 <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
               </div>
             </div>
-            <p><b>---------------------------------------------------------------------- </b>  </p>
+            <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
           {% endfor%}
         </div>
       </div>
@@ -119,7 +117,7 @@
                 <h5><span class="badge bg-secondary">{{assig.asign_date}} </span></h5>
               </div>
             </div>
-            <p><b>---------------------------------------------------------------------- </b>  </p>
+            <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
         {% endfor%}
         </div>
       </div>
@@ -142,7 +140,7 @@
                 <h5><span class="badge bg-secondary">{{exp.asign_date}} </span></h5>
               </div>
             </div>
-          <p><b>---------------------------------------------------------------------- </b>  </p>
+          <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
           {% endfor%}
         </div>
       </div>
@@ -164,7 +162,7 @@
                 <h5><span class="badge bg-secondary">{{insp.asign_date}} </span></h5>
               </div>
             </div>
-          <p><b>---------------------------------------------------------------------- </b>  </p>
+          <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
           {% endfor%}
         </div>
       </div>
@@ -182,7 +180,7 @@
                 <h5><span class="badge bg-secondary">{{empl.surname}}  </span></h5>
               </div>
             </div>
-          <p><b>---------------------------------------------------------------------- </b>  </p>
+          <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
           {% endfor%}
         </div>
       </div>
