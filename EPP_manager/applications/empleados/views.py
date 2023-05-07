@@ -60,7 +60,8 @@ def employee_details(request, employee):
         'document_type':'passport',
         'document_number':'123456789',
         'email':'ale@gmail.com',
-        'status': 'Active'
+        'status': 'Active',
+        'coment':'Perosna medio loca',
     }
     
     epp_1=[{'type':'Casco', 'serial_number':'csc1234', 'manufacturer':'MSA', 'asign_date':'12-4-2022'},{'type':'Anteojos', 'serial_number':'antdd53234', 'manufacturer':'North', 'asign_date':'30-1-2021'},
@@ -85,13 +86,12 @@ def baja_empleado(request):
 def employee_new(request):
     # Show the form to load a new employee
     if request.method == "POST":
-        employee_new_form=Employee(request.POST)
-        # Validaciones
-        if employee_new_form.is_valid():
-            fname=employee_new_form.cleaned_data['name']
-            fsurname=employee_new_form.cleaned_data['surname']
-            
+        employee_new_form=Employee(request.POST)    
+        if employee_new.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'El EPP fue cargado correctamente')        
             return redirect("/empleados/employee_details/" + fname)
+        else:
+            messages.error(request, 'Error al grabar los datos, por favor verifique los datos ingresados')
     else:
         employee_new_form=Employee()
     context= {'form_new_employee': employee_new_form}

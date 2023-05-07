@@ -28,12 +28,12 @@ def contact(request):
         contact_form=Contact(request.POST)
         # Validaciones
         if contact_form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'El mensaje fue enviado correctamente, te conestaremos a la brevedad')        
             return redirect('contact')
-          
+        else:
+            messages.error(request, 'Error al enviar el mensaje, por favor revisa los datos e intenta nuevamente')
     else:
         contact_form=Contact()
     context= {'contact_form': contact_form}
     return render(request,'index/contact.html' , context)
     
-    
-       

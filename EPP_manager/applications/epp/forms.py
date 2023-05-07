@@ -1,5 +1,5 @@
 from django import forms    
-
+from datetime import date
 
 
 
@@ -28,25 +28,25 @@ class New_epp(forms.Form):
          label="Tipo de EPP",
          choices=epp_types,
          required = True,)
-    
     epp_sub_type =forms.ChoiceField(
          label="Subtipo de EPP",
          choices=epp_sub_types,
          required = True,)
-    
-    
-
     manufacturer = forms.CharField(label="Fabricante",
-        required = True,
+        required = True, min_length=2
         )
-
     serial_n = forms.CharField(label="N° de serie",
-        required = True,
+        required = True, min_length=4
         )
-
-    expired_dated = forms.DateField(label="Fecha de vencimiento", widget=forms.DateInput(attrs={'type': 'date'}))
-
-    
-    inspection_period = forms.IntegerField(label="Periodo entre inspecciones (días)", widget=forms.Select(choices=choises_days))
-    
-    comment = forms.CharField(label="Comentarios",widget=forms.Textarea())
+    expired_dated = forms.DateField(label="Fecha de vencimiento", widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    inspection_period = forms.IntegerField(label="Periodo entre inspecciones (días)", widget=forms.Select(choices=choises_days)
+    )
+    comment = forms.CharField(label="Comentarios",widget=forms.Textarea(attrs={"rows":5, "cols":100, 'style':'resize:none;'}))
+    # TODO add validate for date not before to actual date++
+      # Validaciones
+    """def clean_expired_dated(self):
+        expired_d = self.cleaned_data('expired_dated')
+        hoy = date.today()
+        print(hoy)
+    """

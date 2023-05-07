@@ -76,3 +76,6 @@ function fn_employees() {
   
 }
 
+window.onload = function () {
+    fn_in_stock();
+}

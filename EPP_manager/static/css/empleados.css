@@ -22,40 +22,6 @@ html{
     
 }
 
-#in_stock {
-    visibility:visible;
-    position: absolute;
-}
-
-#assigned{
-    visibility:initial;
-    position: absolute;
-}
-
-#to_expire{
-    visibility: visible;
-    position: absolute;
-}
-
-#to_inspect{
-    visibility: visible;
-    position: absolute;
-}
-
-#employees{
-    visibility: visible;
-    position: absolute;
-}
-
-.textos{
-    color: aliceblue;
-}
-
-
-.seleccioens{
-    font-size:medium  ;
-    margin-bottom: 8px;
-}
 
 .formulario{
     position:absolute;

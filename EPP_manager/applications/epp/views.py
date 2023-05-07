@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from .forms import New_epp
@@ -28,8 +29,10 @@ def epp_new(request):
         epp_form = New_epp(request.POST)
         # Validations
         if epp_form.is_valid():
-            # TODO add validate for date not before to actual date
+            messages.add_message(request, messages.SUCCESS, 'El EPP fue cargado correctamente')
             return redirect("/epp/epp_new")
+        else:
+            messages.error(request, 'Error al grabar los datos, por favor verifique los datos ingresados')
     else:
         epp_form = New_epp()
     context = {'form_epp': epp_form}

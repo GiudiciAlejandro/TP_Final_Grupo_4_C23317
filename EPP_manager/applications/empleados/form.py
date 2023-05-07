@@ -217,4 +217,6 @@ class Employee(forms.Form):
     birthday = forms.DateField(label="Fecha de nacimiento", widget=forms.DateInput(attrs={"type": "date"}))
     company = forms.CharField(label="Empresa", required=True)
     email = forms.EmailField(label="email")
+    comment = forms.CharField(label="Comentarios",widget=forms.Textarea(attrs={"rows":5, "cols":100, 'style':'resize:none;'}))
+    
 

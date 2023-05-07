@@ -10,7 +10,7 @@ html{
     background-color: rgb(44, 44, 43);
     background-repeat: no-repeat fixed center;
     background-size:cover;
-
+    min-height: 1000px;
         
 }
 
@@ -25,7 +25,7 @@ html{
 }
 
 #assigned{
-    visibility:initial;
+    visibility:visible;
     position: absolute;
 }
 
