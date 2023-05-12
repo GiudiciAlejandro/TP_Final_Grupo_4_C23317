@@ -32,7 +32,7 @@ def epp_new(request):
             messages.add_message(request, messages.SUCCESS, 'El EPP fue cargado correctamente')
             return redirect("/epp/epp_new")
         else:
-            messages.error(request, 'Error al grabar los datos, por favor verifique los datos ingresados')
+            messages.add_message(request, messages.ERROR, 'Error al cargar los datos, por favor verifique los mismos e intente nuevamente')
     else:
         epp_form = New_epp()
     context = {'form_epp': epp_form}

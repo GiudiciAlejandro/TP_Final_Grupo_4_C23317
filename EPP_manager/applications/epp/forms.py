@@ -1,5 +1,6 @@
 from django import forms    
-from datetime import date
+from datetime import date, timedelta, datetime
+from django.core.exceptions import ValidationError
 
 
 
@@ -43,10 +44,13 @@ class New_epp(forms.Form):
     inspection_period = forms.IntegerField(label="Periodo entre inspecciones (días)", widget=forms.Select(choices=choises_days)
     )
     comment = forms.CharField(label="Comentarios",widget=forms.Textarea(attrs={"rows":5, "cols":100, 'style':'resize:none;'}))
-    # TODO add validate for date not before to actual date++
       # Validaciones
-    """def clean_expired_dated(self):
-        expired_d = self.cleaned_data('expired_dated')
+   
+    def clean_expired_dated(self):
+        expired_d = self.cleaned_data['expired_dated']
         hoy = date.today()
-        print(hoy)
-    """
+        time_expire = ((hoy - expired_d).days)
+        if time_expire < 180:
+            raise forms.ValidationError(message="La fecha de validez del EPP debe ser mayor a 6 meses.")
+        return time_expire
+

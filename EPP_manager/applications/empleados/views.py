@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
-from .form import BajaEmpleadoForm, Employee
+from django.contrib import messages
+from .form import  Employee_form
 
 # Create your views here.
 
@@ -74,26 +75,21 @@ def employee_details(request, employee):
     
 
 
-def baja_empleado(request):
-    # Mark the selected employee as deleted in the DB
-    Baja_Empleado= BajaEmpleadoForm()
-    context={'form': Baja_Empleado}
 
-    print(request.POST)
-    return render(request,'employee/BajaEmpleados.html', context )
 
     
 def employee_new(request):
     # Show the form to load a new employee
     if request.method == "POST":
-        employee_new_form=Employee(request.POST)    
-        if employee_new.is_valid():
-            messages.add_message(request, messages.SUCCESS, 'El EPP fue cargado correctamente')        
-            return redirect("/empleados/employee_details/" + fname)
+        employee_new_form=Employee_form(request.POST) 
+        # Validaciones
+        if employee_new_form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'Se han cargado correctamente los datos del nuevo empleado')        
+            return redirect('employee_new')
         else:
-            messages.error(request, 'Error al grabar los datos, por favor verifique los datos ingresados')
+            messages.error(request, 'Error al cargar el empleado, por favor revise los datos e intenta nuevamente')   
     else:
-        employee_new_form=Employee()
+        employee_new_form=Employee_form()
     context= {'form_new_employee': employee_new_form}
     return render(request,'employee/employee_new.html' , context)
 

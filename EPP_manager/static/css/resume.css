@@ -7,11 +7,16 @@ html{
 }
 
 .main_resumen{
-    background-color: rgb(44, 44, 43);
+    background-color: rgb(56, 55, 56);
     background-repeat: no-repeat fixed center;
     background-size:cover;
     min-height: 1000px;
         
+}
+
+
+.campos_form{
+    color: aliceblue;;
 }
 
 .resumen{

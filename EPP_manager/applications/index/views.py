@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
-from .forms import Logeo, Contact
+from .forms import Logeo, Contact_form
 
 
 # Create your views here.
@@ -25,15 +25,15 @@ def login(request):
         
 def contact(request):
     if request.method == "POST":
-        contact_form=Contact(request.POST)
+        contact=Contact_form(request.POST)
         # Validaciones
-        if contact_form.is_valid():
+        if contact.is_valid():
             messages.add_message(request, messages.SUCCESS, 'El mensaje fue enviado correctamente, te conestaremos a la brevedad')        
             return redirect('contact')
         else:
             messages.error(request, 'Error al enviar el mensaje, por favor revisa los datos e intenta nuevamente')
     else:
-        contact_form=Contact()
-    context= {'contact_form': contact_form}
+        contact=Contact_form()
+    context= {'contact': contact}
     return render(request,'index/contact.html' , context)
     
