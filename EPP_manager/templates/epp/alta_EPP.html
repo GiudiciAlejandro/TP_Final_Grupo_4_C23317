@@ -1,7 +1,7 @@
 
 {% extends 'base/base1.html' %}
 {% load static %}
-
+{% load django_bootstrap5 %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
 {% endblock %}
@@ -31,50 +31,14 @@
           <!-- EPPs picture at left-->
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
-        <div class="col-8">
-          <form action="" method="POST">
-              <div class="row">
-              {% csrf_token %}
-              <div class="col-3 textos">
-                <div>
-                  <h5><span class="badge bg-secondary w-100">{{ form_epp.epp_type.label }}</span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.epp_sub_type.label }} </span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.manufacturer.label }} </span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.serial_n.label }} </span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.expired_dated.label }} </span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.inspection_period.label }} </span></h5>
-                  <h5><span class="badge bg-secondary w-100"> {{ form_epp.comment.label }} </span></h5>
-                </div>
-              </div>
-              <div class="col-9">
-                <div class="seleccioens">{{ form_epp.epp_type }} </div>
-                <div class="seleccioens">{{ form_epp.epp_sub_type }} </div>
-                <div class="seleccioens">{{ form_epp.manufacturer }} </div>
-                <div class="seleccioens">{{ form_epp.serial_n }} </div>
-                <div class="seleccioens">{{ form_epp.expired_dated }} </div>
-                <div class="seleccioens">{{ form_epp.inspection_period }} </div>
-                <div class="seleccioens">{{ form_epp.comment }} </div>
-              </div>
-            </div>
-            <!-- boton -->
-            <div style="text-align: center;">
-              <button type="submit" class="btn btn-dark btn-lg btn-block " >Cargar datos</button>
-            </div>
-            </form>
-            <div>
-              {% if messages %}
-              {% for message in messages %}
-                {% if message.tags == 'success' %}
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
-                    </button>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-            </div>
+        <div class="col-4">
+          <form action="" method="post" class="form-control-sm campos_form">
+            {% csrf_token %}
+            {% bootstrap_form form_epp   %}
+            <button type="submit" class="btn btn-primary">Cargar datos</button>
+          </form>
         </div>
+        
       </div>
     </div>
   </div> 

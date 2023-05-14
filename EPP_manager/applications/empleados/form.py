@@ -1,9 +1,6 @@
 from django import forms
+from datetime import date, timedelta, datetime
 
-class BajaEmpleadoForm(forms.Form):
-    Nombre = forms.CharField(label="Nombre", required=True)
-    Apellido = forms.CharField(label="Apellido", required=True)
-    DNI = forms.IntegerField(label="DNI", required=True)
 
 doc_types=[{"dni", "DNI"},
          {"passport", "Pasaporte"},
@@ -208,15 +205,21 @@ countries=[
 ("ZIMBABUE", "ZIMBABUE"),
 
 ]
-class Employee(forms.Form):
+class Employee_form(forms.Form):
     name = forms.CharField(label="Nombre", min_length=2, required=True)
     surname = forms.CharField(label="Apellido", min_length=2, required=True)
     document_type= forms.ChoiceField(label="Tipo de documento", choices=doc_types)
-    document_N = forms.CharField(label="DNI",min_length=6, max_length=15, required=True)
+    document_N = forms.CharField(label="Documento",min_length=6, max_length=15, required=True)
     nacionality = forms.ChoiceField(label="Nacionalidad", required=True,choices=countries )
     birthday = forms.DateField(label="Fecha de nacimiento", widget=forms.DateInput(attrs={"type": "date"}))
     company = forms.CharField(label="Empresa", required=True)
     email = forms.EmailField(label="email")
     comment = forms.CharField(label="Comentarios",widget=forms.Textarea(attrs={"rows":5, "cols":100, 'style':'resize:none;'}))
-    
+
+    def clean_birthday(self):
+        nacimiento=self.cleaned_data['birthday']
+        edad = ((date.today() - nacimiento).days)/365.2425
+        if edad < 18:
+            raise forms.ValidationError("La persona tiene menos de 18 años, esto el ilegal.")
+
 

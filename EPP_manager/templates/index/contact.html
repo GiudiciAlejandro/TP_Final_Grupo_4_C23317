@@ -1,5 +1,6 @@
 {% extends 'base/base1.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block extra_css %}
      <link rel="stylesheet" href="{% static '/css/resume.css' %}"> 
@@ -14,24 +15,17 @@
   <!--Caja-->
   {% block contenido %} 
   <main class=main>
-    <div class="container">
-      <div class="d-flex justify-content-center formulario">
-        <div class="col-8">
-          <h3>Deja tu mensaje, te responderemos a la brevedad</h3>
-          
-            <form action="" method="POST">
-              <hr class="mt-3">
-              {% csrf_token %}
-              <div class="col-sm-4  logeo_labels">
-                {{ contact_form }}
-              </div>
-              <!-- boton -->
-              <div style="text-align: center;">
-                <button type="submit" class="btn btn-dark btn-lg btn-block " >Enviar</button>
-              </div>
-            </form>
-        </div>
+    <div class="container ">
+      <div class="row my-5">
+        <div class="col-md-6"></div>
+          <div class="col-md-6 textos">
+              <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form contact %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
       </div>
     </div>
   </main>
-  {% endblock %}
+{% endblock %}
