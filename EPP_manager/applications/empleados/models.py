@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Countries(models.Model):
     country_name = models.CharField(verbose_name="Nombre del país", max_length=75 )
@@ -17,9 +18,9 @@ class Company(models.Model):
 class Worker(models.Model):
     worker_name = models.CharField(verbose_name="Nombre", max_length=50,)
     worker_surname = models.CharField(verbose_name="Apellido", max_length=50,)
-    worker_company = models.CharField(verbose_name="Empresa", max_length=50,)
-    worker_nationality = models.ForeignKey(Countries,on_delete=models.DO_NOTHING)
-    worker_doc_type = models.ForeignKey(Doc_types,on_delete=models.DO_NOTHING)
+    worker_company = models.ForeignKey(Company, on_delete=models.CASCADE,verbose_name="Empresa", max_length=50,)
+    worker_nationality = models.ForeignKey(Countries,on_delete=models.DO_NOTHING, verbose_name="Nacionalidad")
+    worker_doc_type = models.ForeignKey(Doc_types,on_delete=models.DO_NOTHING, verbose_name="Tipo de documento")
     worker_doc_n = models.CharField(verbose_name="N° de documento", max_length=50,)
     worker_state = models.BooleanField(verbose_name="Estado",)
     worker_comments = models.TextField(verbose_name="Comentarios", max_length=500,)

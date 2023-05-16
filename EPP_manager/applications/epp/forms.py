@@ -54,3 +54,7 @@ class New_epp(forms.Form):
             raise forms.ValidationError(message="La fecha de validez del EPP debe ser mayor a 6 meses.")
         return time_expire
 
+    def clean_inspection_period(self):
+        insp_period = self.cleaned_data['inspection_period']
+        if insp_period < 15:
+            raise forms.ValidationError('El período de inspección debe ser mayor a los 15 días')
