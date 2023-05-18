@@ -1,3 +1,8 @@
 {
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none",
+    "editor.minimap.maxColumn": 240
 }
