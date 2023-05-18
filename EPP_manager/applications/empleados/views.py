@@ -14,12 +14,13 @@ def employee_lits(request):
     # Clicking in one employee open employee_details page
     context = {}
     employees = Worker.objects.all()
+    epp_list=[]
     context["empleados"] = employees
 
-    epp_1 = [{'type': 'Casco', 'serial_number': 'csc1234', 'manufacturer': 'MSA', 'asign_date': '12-4-2022'}, {'type': 'Anteojos', 'serial_number': 'antdd53234', 'manufacturer': 'North', 'asign_date': '30-1-2021'},
-             {'type': 'Zapatos', 'serial_number': 'boots1234', 'manufacturer': 'Honeywell', 'asign_date': '2-8-2009'}]
+    """epp_1 = [{'type': 'Casco', 'serial_number': 'csc1234', 'manufacturer': 'MSA', 'asign_date': '12-4-2022'}, {'type': 'Anteojos', 'serial_number': 'antdd53234', 'manufacturer': 'North', 'asign_date': '30-1-2021'},
+             {'type': 'Zapatos', 'serial_number': 'boots1234', 'manufacturer': 'Honeywell', 'asign_date': '2-8-2009'}]"""
 
-    context["epps"]= epp_1
+    context["epps"]= epp_list
     return render(request, 'employee/employee_list.html', context)
     pass
 

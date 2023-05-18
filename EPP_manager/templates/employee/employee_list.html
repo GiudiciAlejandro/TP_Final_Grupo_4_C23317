@@ -60,10 +60,14 @@
             </div>
           </div>
           <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
+          {% empty %}
+        <p  class="textos">No existen EPPs cargados en la base de datos</p>
         {% endfor%}
       </div>
       <hr class="textos" size="2px"/> 
-      {% endfor%}
+      {% empty %}
+      <p  class="textos">No existen empleados cargados en la base de datos</p>
+      {% endfor %}
     <div> 
   </main>
   {% endblock %}
