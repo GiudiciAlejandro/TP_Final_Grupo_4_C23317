@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from django.contrib import messages
-from .form import Employee_form
-from .models import Worker, Countries, Company, Doc_types
+from .form import Employee_form, Company_form
+from .models import *
 from datetime import datetime
+
 
 # Create your views here.
 
@@ -17,12 +18,8 @@ def employee_lits(request):
     epp_list=[]
     context["empleados"] = employees
 
-    """epp_1 = [{'type': 'Casco', 'serial_number': 'csc1234', 'manufacturer': 'MSA', 'asign_date': '12-4-2022'}, {'type': 'Anteojos', 'serial_number': 'antdd53234', 'manufacturer': 'North', 'asign_date': '30-1-2021'},
-             {'type': 'Zapatos', 'serial_number': 'boots1234', 'manufacturer': 'Honeywell', 'asign_date': '2-8-2009'}]"""
-
-    context["epps"]= epp_list
     return render(request, 'employee/employee_list.html', context)
-    pass
+
 
 
 def employee_details(request, employee):
@@ -46,11 +43,8 @@ def employee_details(request, employee):
         'coment': 'Perosna medio loca',
     }
 
-    epp_1 = [{'type': 'Casco', 'serial_number': 'csc1234', 'manufacturer': 'MSA', 'asign_date': '12-4-2022'}, {'type': 'Anteojos', 'serial_number': 'antdd53234', 'manufacturer': 'North', 'asign_date': '30-1-2021'},
-             {'type': 'Zapatos', 'serial_number': 'boots1234', 'manufacturer': 'Honeywell', 'asign_date': '2-8-2009'}]
-    
     context = {"empleado": employee_1,
-               "epps": epp_1}
+             "epps": epp_1}
     return render(request, 'employee/employee_details.html', context)
 
 
@@ -70,6 +64,7 @@ def employee_new(request):
             wcomments = employee_new_form.cleaned_data["comments"]
             wemail = employee_new_form.cleaned_data["email"]
             wbirthday = employee_new_form.cleaned_data["birthday"]
+            
             # Fill table
             # Create new instance of model Worker
             new_employee = Worker(
@@ -83,7 +78,6 @@ def employee_new(request):
                 worker_email = wemail,
                 worker_comments=wcomments,
                 worker_state=True,
-                worker_created=datetime.now()
             )
             new_employee.save()
             messages.add_message(
@@ -96,3 +90,44 @@ def employee_new(request):
         employee_new_form = Employee_form()
     context = {'form_new_employee': employee_new_form}
     return render(request, 'employee/employee_new.html', context)
+
+
+def companies_list(request):
+    # Show a list of all companies
+    context = {}
+    companies_list = Company.objects.all()
+    context["company"] = companies_list
+
+    return render(request, 'employee/company_list.html', context)
+
+
+def company_new(request):
+    # Show the form to load a new employee
+    if request.method == "POST":
+        company_new_form = Company_form(request.POST)
+        # Validaciones
+        if company_new_form.is_valid():
+            # Get data from form
+            cname = company_new_form.cleaned_data["name"]
+            cdescript = company_new_form.cleaned_data["description"]
+            caddress = company_new_form.cleaned_data["address"]
+                        
+            # Fill table
+            # Create new instance of model Company
+            new_company = Company(
+                company_name=cname,
+                company_descript=cdescript,
+                company_address=caddress,
+                company_created=datetime.now()
+            )
+            new_company.save()
+            messages.add_message(
+                request, messages.SUCCESS, 'Se han cargado correctamente los datos de la nueva empresa')
+            return redirect('companies_list')
+        else:
+            messages.error(
+                request, 'Error al cargar el empleado, por favor revise los datos e intenta nuevamente')
+    else:
+        company_new_form = Company_form()
+    context = {'form_new_company': company_new_form}
+    return render(request, 'employee/company_new.html', context)

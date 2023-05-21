@@ -20,7 +20,7 @@
 
 {% endblock %}
 
-{% block page_title %} Ingreso nuevo EPP {% endblock %}
+{% block page_title %} Ingreso nuevo tipo de EPP {% endblock %}
 {% block contenido %} 
 <main class=main_resumen>
   <div class="row">
@@ -32,10 +32,9 @@
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
         <div class="col-4">
-          <a href="{% url 'epp_type' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Agregar tipo de EPP</a>
           <form action="" method="post" class="form-control-sm campos_form">
             {% csrf_token %}
-            {% bootstrap_form form_epp   %}
+            {% bootstrap_form form_epptype %}
             <button type="submit" class="btn btn-primary">Cargar datos</button>
           </form>
         </div>

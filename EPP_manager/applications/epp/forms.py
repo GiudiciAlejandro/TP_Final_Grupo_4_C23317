@@ -1,6 +1,7 @@
-from django import forms    
+from django import forms
 from datetime import date, timedelta, datetime
 from django.core.exceptions import ValidationError
+from .models import *
 
 
 
@@ -23,28 +24,14 @@ epp_sub_types=[('none','---------------'),
 
 choises_days = [tuple([x,x]) for x in range(15,365)]
 
-class New_epp(forms.Form):
-   
-    epp_type = forms.ChoiceField(
-         label="Tipo de EPP",
-         choices=epp_types,
-         required = True,)
-    epp_sub_type =forms.ChoiceField(
-         label="Subtipo de EPP",
-         choices=epp_sub_types,
-         required = True,)
-    manufacturer = forms.CharField(label="Fabricante",
-        required = True, min_length=2
-        )
-    serial_n = forms.CharField(label="N° de serie",
-        required = True, min_length=4
-        )
-    expired_dated = forms.DateField(label="Fecha de vencimiento", widget=forms.DateInput(attrs={'type': 'date'})
-    )
-    inspection_period = forms.IntegerField(label="Periodo entre inspecciones (días)", widget=forms.Select(choices=choises_days)
-    )
-    comment = forms.CharField(label="Comentarios",widget=forms.Textarea(attrs={"rows":5, "cols":100, 'style':'resize:none;'}))
-      # Validaciones
+class New_epp(forms.ModelForm):
+    
+    class Meta:
+        model = Epp
+        fields = "__all__"
+
+    # TODO ver como cambiar el tipo de input para la fecha de vencimientos
+    # Validaciones
    
     def clean_expired_dated(self):
         expired_d = self.cleaned_data['expired_dated']
@@ -58,3 +45,9 @@ class New_epp(forms.Form):
         insp_period = self.cleaned_data['inspection_period']
         if insp_period < 15:
             raise forms.ValidationError('El período de inspección debe ser mayor a los 15 días')
+
+
+class New_epptype(forms.ModelForm):
+    class Meta:
+        model=Epp_types
+        fields = "__all__"

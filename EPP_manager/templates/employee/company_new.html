@@ -1,0 +1,80 @@
+
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'company_new' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
+
+{% endblock %}
+
+{% block page_title %} Nueva empresa prestadora de servicios {% endblock %}
+{% block contenido %} 
+<main class=main_resumen>
+  <div class="row">
+    <!--Main button section-->
+    <div class="col-10">
+      <div class="row">
+        <div class="col-4">
+          <!-- EPPs picture at left-->
+          <img src="{% static 'images/empresas.PNG' %}" alt="Empresas">
+        </div>
+        <div class="col-8">
+          <form action="" method="POST">
+            <div class="row textos">
+              {% csrf_token %}
+              {{ form_new_company.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ form_new_company.name.errors }}
+                    <p class="textos">{{ form_new_company.name.label_tag }} </p>
+                    <p class="entradas"> {{form_new_company.name}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_company.description.errors }}
+                  <p class="textos">{{ form_new_company.description.label_tag }} </p>
+                  <p class="entradas"> {{form_new_company.description}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_company.address.errors }}
+                  <p class="textos">{{ form_new_company.address.label_tag }} </p>
+                  <p class="entradas"> {{form_new_company.address}} </p>
+                </div>
+            </div>
+            <!-- boton -->
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-dark btn-lg btn-block " >Cargar datos</button>
+            </div>
+          </form>
+            <div>
+              {% if messages %}
+                {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                      </button>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</main>
+{% endblock %}
+  
+  

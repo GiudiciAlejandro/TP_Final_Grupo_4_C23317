@@ -1,0 +1,87 @@
+
+
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/empleados.css' %}"> 
+{% endblock %}
+
+{% block menus %}
+<!-- Menu items  -->
+<li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
+<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
+
+{% endblock %}
+
+{% block page_title %} Listado de empresas {% endblock %}
+  <!--Caja-->
+  {% block contenido %} 
+  <main class=main_resumen>
+    <div class="row">
+      <div class="col-4">
+        <!-- EPPs picture at left-->
+        <img src="{% static 'images/empresas.PNG' %}" alt="Empresas prestadoras">
+      </div>
+      <!--Repeat for every employee-->
+      <div class="col-5">
+        <h2><span class="badge bg-secondary">Empresas prestadoras de servicios </span>
+            <a href="{% url 'company_new' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Agregar empresa</a>
+        </h2>
+        
+            <form action="" method="POST">
+              <div class="row textos">
+                {% csrf_token %}
+                {{ company.non_field_errors }}
+                  <div class="fieldWrapper">
+                      {{ company.company_name.errors }}
+                      <p class="textos">{{ company.company_name.label_tag }} </p>
+                      <p class="entradas"> {{company.company_name}} </p>
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ company.company_descript.errors }}
+                    <p class="textos">{{ company.company_descript.label_tag }} </p>
+                    <p class="entradas"> {{company.company_descript}} </p>
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ company.company_address.errors }}
+                    <p class="textos">{{ company.company_address.label_tag }} </p>
+                    <p class="entradas"> {{company.company_address}} </p>
+                  </div>  
+              </div>
+            <div>
+              {% if messages %}
+                {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                      </button>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+            </form>
+            <section class="listado">
+              {% for comp in company %}
+              <article>
+                  <p><b>Nombre</b>: {{comp.company_name}}</p>
+                  <p><b>Apellido</b>: {{comp.company_descript}}</p>
+                  <p><b>Direccion</b>: {{comp.company_address}}</p>
+              </article>
+              {% empty %}
+              <article>No existen empresas cargadas</article>
+              {% endfor %}
+          </section>
+
+          </div>
+          
+      </div>
+    <div>  
+  </main>
+  {% endblock %}

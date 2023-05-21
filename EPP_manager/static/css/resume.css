@@ -51,8 +51,13 @@ html{
 
 .textos{
     color: aliceblue;
+    margin-bottom: 0%;
 }
 
+.entradas{
+    margin-bottom: 6px;
+    min-width: 5px;
+}
 
 .seleccioens{
     font-size:medium  ;

@@ -1,7 +1,7 @@
 
 {% extends 'base/base1.html' %}
 {% load static %}
-{% load django_bootstrap5 %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
 {% endblock %}
@@ -13,6 +13,7 @@
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
 <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+<li><a class="dropdown-item"  href="{% url 'company_new' %}">Agregar empresa</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
 <li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
@@ -31,12 +32,77 @@
           <!-- EPPs picture at left-->
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
-        <div class="col-4">
-          <form action="" method="post" class="form-control-sm campos_form">
-            {% csrf_token %}
-            {% bootstrap_form form_new_employee layout='inline'  %}
-            <button type="submit" class="btn btn-primary">Cargar datos</button>
+        <div class="col-8">
+          <form action="" method="POST">
+            <div class="row textos">
+              {% csrf_token %}
+              {{ form_new_employee.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ form_new_employee.name.errors }}
+                    <p class="textos">{{ form_new_employee.name.label_tag }} </p>
+                    <p class="entradas"> {{form_new_employee.name}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.surname.errors }}
+                  <p class="textos">{{ form_new_employee.surname.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.surname}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.document_type.errors }}
+                  <p class="textos">{{ form_new_employee.document_type.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.document_type}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.document_N.errors }}
+                  <p class="textos">{{ form_new_employee.document_N.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.document_N}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.nacionality.errors }}
+                  <p class="textos">{{ form_new_employee.nacionality.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.nacionality}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.birthday.errors }}
+                  <p class="textos">{{ form_new_employee.birthday.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.birthday}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.company.errors }}
+                  <p class="textos">{{ form_new_employee.company.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.company}} 
+                  <a href="{% url 'company_new' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Agregar empresa</a>
+                </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.email.errors }}
+                  <p class="textos">{{ form_new_employee.email.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.email}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ form_new_employee.comments.errors }}
+                  <p class="textos">{{ form_new_employee.comments.label_tag }} </p>
+                  <p class="entradas"> {{form_new_employee.comments}} </p>
+                </div>
+            </div>
+            <!-- boton -->
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-dark btn-lg btn-block " >Cargar datos</button>
+            </div>
           </form>
+            <div>
+              {% if messages %}
+                {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                      </button>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
         </div>
       </div>
     </div>
