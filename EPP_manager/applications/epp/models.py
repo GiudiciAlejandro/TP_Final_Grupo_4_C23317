@@ -14,7 +14,7 @@ class Epp(models.Model):
     epp_serial_n=models.CharField(verbose_name="N° de serie", max_length=75)
     epp_manufacturer=models.CharField(verbose_name="Marca", max_length=50)
     epp_expire_date=models.DateField(verbose_name="Fecha de vencimiento")
-    epp_assigned=models.ForeignKey(Worker, verbose_name="Empleado", on_delete=models.DO_NOTHING)
+    epp_assigned=models.ForeignKey(Worker, verbose_name="Empleado", on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 

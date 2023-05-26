@@ -35,7 +35,33 @@
           <a href="{% url 'epp_type' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Agregar tipo de EPP</a>
           <form action="" method="post" class="form-control-sm campos_form">
             {% csrf_token %}
-            {% bootstrap_form form_epp   %}
+            {{ form_epp.non_field_errors }}
+            <div class="fieldWrapper">
+                {{ form_epp.name.errors }}
+                <p class="textos">{{ form_epp.epp_type.label_tag }} </p>
+                <p class="entradas"> {{form_epp.epp_type}} </p>
+            </div>
+            <div class="fieldWrapper">
+              {{ form_epp.epp_serial_n.errors }}
+              <p class="textos">{{ form_epp.epp_serial_n.label_tag }} </p>
+              <p class="entradas"> {{form_epp.epp_serial_n}} </p>
+            </div>
+            <div class="fieldWrapper">
+              {{ form_epp.epp_manufacturer.errors }}
+              <p class="textos">{{ form_epp.epp_manufacturer.label_tag }} </p>
+              <p class="entradas"> {{form_epp.epp_manufacturer}} </p>
+            </div>
+            <div class="fieldWrapper">
+              {{ form_epp.epp_expire_date.errors }}
+              <p class="textos">{{ form_epp.epp_expire_date.label_tag }} </p>
+              <p class="entradas"><input type = 'date' value= {{form_epp.epp_expire_date}}> </p>
+            </div>
+            <div class="fieldWrapper">
+              {{ form_epp.epp_assigned.errors }}
+              <p class="textos">{{ form_epp.epp_assigned.label_tag }} </p>
+              <p class="entradas"> {{form_epp.epp_assigned}} </p>
+            </div>
+           
             <button type="submit" class="btn btn-primary">Cargar datos</button>
           </form>
         </div>

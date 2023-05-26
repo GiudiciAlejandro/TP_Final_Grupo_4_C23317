@@ -5,22 +5,6 @@ from .models import *
 
 
 
-epp_types = [('casco','Casco'), 
-                ('zapatos','Zapatos'),
-                ('anteojos','Anteojos'),
-                ('auditivo','Protector auditivo'),
-                ('guantes','Guantes'),
-                ('anteojos','Anteojos'),
-                ('mascarilla','Mascarilla'),
-                ('chaleco','Chaleco reflectivo'),
-                ]
-
-
-epp_sub_types=[('none','---------------'), 
-                ('casco_tipo1','Casco tipo1'), 
-                ('casco_tipo2','Casco tipo2'), 
-                ('casco_tipo3','Casco tipo3'), 
-                ]
 
 choises_days = [tuple([x,x]) for x in range(15,365)]
 
@@ -29,6 +13,7 @@ class New_epp(forms.ModelForm):
     class Meta:
         model = Epp
         fields = "__all__"
+        widgets = {'expired_date':forms.DateInput(attrs={"type": "date"})}
 
     # TODO ver como cambiar el tipo de input para la fecha de vencimientos
     # Validaciones

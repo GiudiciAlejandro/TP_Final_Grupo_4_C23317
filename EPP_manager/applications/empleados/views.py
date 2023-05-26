@@ -118,7 +118,6 @@ def company_new(request):
                 company_name=cname,
                 company_descript=cdescript,
                 company_address=caddress,
-                company_created=datetime.now()
             )
             new_company.save()
             messages.add_message(
