@@ -37,7 +37,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_in_stock()">
               En stok
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                5
+                {{in_stock.0}}
               </span>
             </button>
           </div>
@@ -45,7 +45,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_assigned()">
               Asignados
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                4
+                {{assigned.0}}
               </span>
             </button>
           </div>
@@ -61,7 +61,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_expire()">
               Próximos a vencer
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                43
+                {{to_expire}}
               </span>
             </button>
           </div>
@@ -69,7 +69,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_employees()">
               Total empleados 
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                31
+                {{employe_count.0}} 
               </span>
             </button>
           </div>
@@ -80,19 +80,17 @@
     
       <div class="col-4 resumen" id="div_in_stock">
         <div  id="in_stock"> 
-          {% for ep in in_stock %}
+          {% for ep in epps %}
             <div class="row">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
               </div>
               <div class="col-6">
-                <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
-                <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{ep.epp_type}}</span></h5>
+                <h5><span class="badge bg-secondary">{{ep.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{ep.epp_manufacturer}} </span></h5>
               </div>
             </div>
             <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
@@ -102,42 +100,40 @@
 
       <div class="col-4 resumen" id="div_assigned">
         <div  id="assigned"> 
-          {% for assig in assigned %}
+          {% for epps in epps_employee %}
+            {% for assig in epps %}
             <div class="row">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
               </div>
               <div class="col-6">
-                <h5><span class="badge bg-secondary">{{assig.type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{assig.serial_number}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{assig.manufacturer}} </span></h5>
-                <h5><span class="badge bg-secondary">{{assig.asign_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{assig.epp_type}}</span></h5>
+                <h5><span class="badge bg-secondary">{{assig.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{assig.epp_manufacturer}} </span></h5>
               </div>
             </div>
             <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
-        {% endfor%}
+            {% endfor%}
+          {% endfor%}
         </div>
       </div>
 
 
       <div class="col-4 resumen" id="div_to_expire">
         <div  id="to_expire"> 
-          {% for exp in to_expire %}
+          {% for exp in epps_to_expire %}
             <div class="row">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
               </div>
               <div class="col-6">
-                <h5><span class="badge bg-secondary">{{exp.type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{exp.serial_number}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{exp.manufacturer}} </span></h5>
-                <h5><span class="badge bg-secondary">{{exp.asign_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{exp.epp_type}}</span></h5>
+                <h5><span class="badge bg-secondary">{{exp.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{exp.epp_manufacturer}} </span></h5>
               </div>
             </div>
           <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
@@ -153,13 +149,11 @@
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
               </div>
               <div class="col-6">
-                <h5><span class="badge bg-secondary">{{insp.type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{insp.serial_number}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{insp.manufacturer}} </span></h5>
-                <h5><span class="badge bg-secondary">{{insp.asign_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{insp.epp_type}}</span></h5>
+                <h5><span class="badge bg-secondary">{{insp.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{insp.epp_manufacturer}} </span></h5>
               </div>
             </div>
           <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
@@ -176,8 +170,8 @@
                 <h5><span class="badge bg-secondary w-100">Apellido </span></h5>
               </div>
               <div class="col-4">
-                <h5><span class="badge bg-secondary">{{empl.name}}</span></h5>
-                <h5><span class="badge bg-secondary">{{empl.surname}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{empl.worker_name}}</span></h5>
+                <h5><span class="badge bg-secondary">{{empl.worker_surname}}  </span></h5>
               </div>
             </div>
           <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>

@@ -5,6 +5,7 @@ from django.contrib import messages
 from .form import Employee_form, Company_form
 from .models import *
 from datetime import datetime
+from applications.epp.forms import Epp
 
 
 # Create your views here.
@@ -15,9 +16,11 @@ def employee_lits(request):
     # Clicking in one employee open employee_details page
     context = {}
     employees = Worker.objects.all()
-    epp_list=[]
+    epp_list= Epp.objects.exclude(epp_assigned__isnull=True)
+    print(epp_list[0].epp_manufacturer)
+    #exclude(epp_assigned__isnull=True).exclude(epp_assigned__exact="")
     context["empleados"] = employees
-
+    context["epps"] = epp_list
     return render(request, 'employee/employee_list.html', context)
 
 

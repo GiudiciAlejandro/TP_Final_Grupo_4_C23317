@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date, timedelta, datetime
 from applications.empleados.models import Worker
 
 # Create your models here.
@@ -14,8 +15,9 @@ class Epp(models.Model):
     epp_serial_n=models.CharField(verbose_name="N° de serie", max_length=75)
     epp_manufacturer=models.CharField(verbose_name="Marca", max_length=50)
     epp_expire_date=models.DateField(verbose_name="Fecha de vencimiento")
-    epp_assigned=models.ForeignKey(Worker, verbose_name="Empleado", on_delete=models.DO_NOTHING, null=True, blank=True)
-
+    epp_assigned=models.ForeignKey(Worker, verbose_name="Empleado", 
+    on_delete=models.DO_NOTHING, null=True, blank=True)
+    epp_next_insp_date=models.DateField(verbose_name="Fecha proxima inspección", default='1900-01-01')
 
 
 class Epp_inspections(models.Model):
