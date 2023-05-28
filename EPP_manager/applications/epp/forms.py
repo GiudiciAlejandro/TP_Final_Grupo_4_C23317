@@ -11,7 +11,12 @@ choises_days = [tuple([x,x]) for x in range(15,365)]
 class New_epp(forms.ModelForm):
     class Meta:
         model = Epp
-        fields = "__all__"
+        #fields = "__all__"
+        fields= ["epp_type",
+                "epp_serial_n",
+                "epp_manufacturer", 
+                "epp_expire_date", 
+                "epp_assigned"]
         widgets = {'expired_date':forms.DateInput(attrs={"type": "date"})}
             
     # Validaciones

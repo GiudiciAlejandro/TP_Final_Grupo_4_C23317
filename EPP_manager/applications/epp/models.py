@@ -11,17 +11,17 @@ class Epp_types(models.Model):
         return self.epp_type_name
 
 class Epp(models.Model):
-    epp_type=models.ForeignKey(Epp_types,verbose_name="Tipo de EPP",on_delete=models.CASCADE)
+    epp_type=models.ForeignKey(Epp_types,verbose_name="Tipo de EPP",on_delete=models.CASCADE, related_name="epp_type_related")
     epp_serial_n=models.CharField(verbose_name="N° de serie", max_length=75)
     epp_manufacturer=models.CharField(verbose_name="Marca", max_length=50)
     epp_expire_date=models.DateField(verbose_name="Fecha de vencimiento")
     epp_assigned=models.ForeignKey(Worker, verbose_name="Empleado", 
-    on_delete=models.DO_NOTHING, null=True, blank=True)
+    on_delete=models.DO_NOTHING, related_name="worker_related", null=True, blank=True)
     epp_next_insp_date=models.DateField(verbose_name="Fecha proxima inspección", default='1900-01-01')
 
 
 class Epp_inspections(models.Model):
-    epp_inps_epp=models.ForeignKey(Epp, on_delete=models.CASCADE)
+    epp_inps_epp=models.ForeignKey(Epp, on_delete=models.CASCADE, related_name="epp_related")
     epp_insp_date=models.DateField(verbose_name="Fecha")
     epp_insp_comments=models.TextField(verbose_name="Comentarios", max_length=500)
     epp_insp_status=models.BooleanField(verbose_name="Resultado")

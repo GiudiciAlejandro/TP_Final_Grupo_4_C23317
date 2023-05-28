@@ -25,7 +25,7 @@ class Company(models.Model):
 class Worker(models.Model):
     worker_name = models.CharField(verbose_name="Nombre", max_length=50,)
     worker_surname = models.CharField(verbose_name="Apellido", max_length=50,)
-    worker_company = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Empresa")
+    worker_company = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Empresa", related_name="company_related")
     worker_nationality = models.ForeignKey(Countries,on_delete=models.DO_NOTHING, verbose_name="Nacionalidad")
     worker_doc_type = models.ForeignKey(Doc_types,on_delete=models.DO_NOTHING, verbose_name="Tipo de documento")
     worker_doc_n = models.CharField(verbose_name="N° de documento", max_length=50,)

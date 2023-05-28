@@ -53,7 +53,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_inspect()">
               Proximas inspecciones
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                12
+                {{to_inspect_count}}
               </span>
             </button>
           </div>
@@ -129,11 +129,15 @@
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                <h5><span class="badge bg-secondary w-100">Fecha de vencimiento </span></h5>
+                <h5><span class="badge bg-secondary w-100">Empleado </span></h5>
               </div>
               <div class="col-6">
                 <h5><span class="badge bg-secondary">{{exp.epp_type}}</span></h5>
                 <h5><span class="badge bg-secondary">{{exp.epp_serial_n}}  </span></h5>
                 <h5><span class="badge bg-secondary">{{exp.epp_manufacturer}} </span></h5>
+                <h5><span class="badge bg-secondary">{{exp.epp_expire_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{exp.epp_assigned.worker_surname}} </span></h5>
               </div>
             </div>
           <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
@@ -143,17 +147,21 @@
 
       <div class="col-4 resumen" id="div_to_inspect">
         <div id="to_inspect">
-          {% for insp in to_inspect %}
+          {% for insp in epps_to_inspect %}
             <div class="row">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                <h5><span class="badge bg-secondary w-100">Fecha próxima inspección </span></h5>
+                <h5><span class="badge bg-secondary w-100">Empleado </span></h5>
               </div>
               <div class="col-6">
                 <h5><span class="badge bg-secondary">{{insp.epp_type}}</span></h5>
                 <h5><span class="badge bg-secondary">{{insp.epp_serial_n}}  </span></h5>
                 <h5><span class="badge bg-secondary">{{insp.epp_manufacturer}} </span></h5>
+                <h5><span class="badge bg-secondary">{{insp.epp_next_insp_date}} </span></h5>
+                <h5><span class="badge bg-secondary">{{insp.epp_assigned.worker_surname}} </span></h5>
               </div>
             </div>
           <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
