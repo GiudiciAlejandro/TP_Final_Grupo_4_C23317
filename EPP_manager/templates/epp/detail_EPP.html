@@ -13,14 +13,14 @@
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
 <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
-<li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
 <li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
 <li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
 
 {% endblock %}
 
-{% block page_title %} Ingreso nuevo EPP {% endblock %}
+{% block page_title %} Detalle de EPP {% endblock %}
 {% block contenido %} 
 <main class=main_resumen>
   <div class="row">
@@ -32,37 +32,26 @@
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
         <div class="col-4">
-          <a href="{% url 'epp_type' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Agregar tipo de EPP</a>
+          <a href="{% url 'epp_update' epp.id %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Modificar datos del EPP</a>
           <form action="" method="post" class="form-control-sm campos_form">
             {% csrf_token %}
-            {{ form_epp.non_field_errors }}
-            <div class="fieldWrapper">
-                {{ form_epp.name.errors }}
-                <p class="textos">{{ form_epp.epp_type.label_tag }} </p>
-                <p class="entradas"> {{form_epp.epp_type}} </p>
+            <div>
+                <p class="textos">Tipo: {{epp.epp_type}} </p>
             </div>
-            <div class="fieldWrapper">
-              {{ form_epp.epp_serial_n.errors }}
-              <p class="textos">{{ form_epp.epp_serial_n.label_tag }} </p>
-              <p class="entradas"> {{form_epp.epp_serial_n}} </p>
+            <div>
+              <p class="textos">N de serie: {{epp.epp_serial_n}} </p>
             </div>
-            <div class="fieldWrapper">
-              {{ form_epp.epp_manufacturer.errors }}
-              <p class="textos">{{ form_epp.epp_manufacturer.label_tag }} </p>
-              <p class="entradas"> {{form_epp.epp_manufacturer}} </p>
+            <div>
+              <p class="textos">Fabricante: {{epp.epp_manufacturer}} </p>
             </div>
-            <div class="fieldWrapper">
-              {{ form_epp.epp_expire_date.errors }}
-              <p class="textos">{{ form_epp.epp_expire_date.label_tag }} </p>
-              <p class="entradas"><input type = 'date' value= {{form_epp.epp_expire_date}}> </p>
+            <div>
+              <p class="textos">Fecha de reemplazo: {{epp.epp_expire_date}} </p>
             </div>
-            <div class="fieldWrapper">
-              {{ form_epp.epp_assigned.errors }}
-              <p class="textos">{{ form_epp.epp_assigned.label_tag }} </p>
-              <p class="entradas"> {{form_epp.epp_assigned}} </p>
+            <div>
+              <p class="textos">Empleado: {{epp.epp_assigned}} </p>
             </div>
            
-            <button type="submit" class="btn btn-primary">Cargar datos</button>
+            {% comment %} <button type="submit" class="btn btn-primary">Cargar datos</button> {% endcomment %}
           </form>
         </div>
         

@@ -17,8 +17,11 @@ class New_epp(forms.ModelForm):
                 "epp_manufacturer", 
                 "epp_expire_date", 
                 "epp_assigned"]
-        widgets = {'expired_date':forms.DateInput(attrs={"type": "date"})}
-            
+        widgets = {
+                    'expired_date': forms.DateInput(
+                    format=('%Y-%m-%d'),
+                    attrs={'type': 'date'}),
+}   
     # Validaciones
     def clean_expired_dated(self):
         expired_d = self.cleaned_data['expired_dated']

@@ -15,7 +15,7 @@
 <!-- Menu items  -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
 <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
-<li><a class="dropdown-item"  href="{% url 'epp_list' %}">EPP en stock</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
 <li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
 <li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
@@ -37,7 +37,7 @@
             <button type="button" class="btn btn-secondary position-relative" onclick="fn_in_stock()">
               En stok
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{in_stock.0}}
+                {{in_stock_count.0}}
               </span>
             </button>
           </div>
@@ -80,20 +80,22 @@
     
       <div class="col-4 resumen" id="div_in_stock">
         <div  id="in_stock"> 
-          {% for ep in epps %}
-            <div class="row">
-              <div class="col-6">
-                <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
-                <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+          {% for ep in in_stock %}
+            {% for ep_in_stock in ep %}
+              <div class="row">
+                <div class="col-6">
+                  <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+                  <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+                  <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                </div>
+                <div class="col-6">
+                  <h5><span class="badge bg-secondary"> {{ep_in_stock.epp_type}}</span></h5>
+                  <h5><span class="badge bg-secondary"> <a href="{{ep_in_stock.get_absolute_url}}">{{ep_in_stock.epp_serial_n}} </a>  </span></h5>
+                  <h5><span class="badge bg-secondary">{{ep_in_stock.epp_manufacturer}} </span></h5>
+                </div>
               </div>
-              <div class="col-6">
-                <h5><span class="badge bg-secondary">{{ep.epp_type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{ep.epp_serial_n}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{ep.epp_manufacturer}} </span></h5>
-              </div>
-            </div>
-            <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+              <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+            {% endfor%}
           {% endfor%}
         </div>
       </div>
@@ -107,11 +109,13 @@
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
                 <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                <h5><span class="badge bg-secondary w-100">Empleado </span></h5>
               </div>
               <div class="col-6">
                 <h5><span class="badge bg-secondary">{{assig.epp_type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{assig.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary"> <a href="{{assig.get_absolute_url}}">{{assig.epp_serial_n}} </a>  </span></h5>
                 <h5><span class="badge bg-secondary">{{assig.epp_manufacturer}} </span></h5>
+                <h5><span class="badge bg-secondary">{{assig.epp_assigned.worker_surname}} </span></h5>
               </div>
             </div>
             <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
@@ -134,7 +138,7 @@
               </div>
               <div class="col-6">
                 <h5><span class="badge bg-secondary">{{exp.epp_type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{exp.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary"> <a href="{{exp.get_absolute_url}}">{{exp.epp_serial_n}} </a>  </span></h5>
                 <h5><span class="badge bg-secondary">{{exp.epp_manufacturer}} </span></h5>
                 <h5><span class="badge bg-secondary">{{exp.epp_expire_date}} </span></h5>
                 <h5><span class="badge bg-secondary">{{exp.epp_assigned.worker_surname}} </span></h5>
@@ -158,7 +162,7 @@
               </div>
               <div class="col-6">
                 <h5><span class="badge bg-secondary">{{insp.epp_type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{insp.epp_serial_n}}  </span></h5>
+                <h5><span class="badge bg-secondary"> <a href="{{insp.get_absolute_url}}">{{insp.epp_serial_n}} </a>  </span></h5>
                 <h5><span class="badge bg-secondary">{{insp.epp_manufacturer}} </span></h5>
                 <h5><span class="badge bg-secondary">{{insp.epp_next_insp_date}} </span></h5>
                 <h5><span class="badge bg-secondary">{{insp.epp_assigned.worker_surname}} </span></h5>

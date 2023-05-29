@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
@@ -9,9 +9,9 @@ from .models import *
 
 
 def epp_list(request):
-    in_stock = [Epp.objects.filter(epp_assigned__isnull=True).count()]
-    assigned = [
-        Epp.objects.exclude(epp_assigned__isnull=True).count()]
+    in_stock_count = [Epp.objects.filter(epp_assigned__isnull=True).count()]
+    in_stock = [Epp.objects.filter(epp_assigned__isnull=True)]
+    assigned = [Epp.objects.exclude(epp_assigned__isnull=True).count()]
     epps_to_inspect = get_next_to_inspect()
     to_inspect_count=len(epps_to_inspect)
     employe_count = [Worker.objects.count()]
@@ -20,7 +20,8 @@ def epp_list(request):
     employees = Worker.objects.all()
     epp_to_expire = get_next_to_expire()
     to_expire = len(epp_to_expire)
-    context = {"in_stock": in_stock, 
+    context = {"in_stock_count": in_stock_count, 
+                "in_stock": in_stock,
                 "assigned": assigned, 
                 "to_expire": to_expire,
                 "to_inspect_count": to_inspect_count, 
@@ -47,7 +48,6 @@ def get_next_to_inspect():
 
 def get_next_to_expire():
     # Get EPP list of epp that expires in less than 30 days
-    # TODO Calculate inspection date from insp period from TBL Epp_types
     epps = Epp.objects.all()
     epps_to_expire = []
     for exp_date in epps:
@@ -56,7 +56,6 @@ def get_next_to_expire():
         time_expire = ((epp_exp_date - hoy).days)
         if time_expire < 30:
             epps_to_expire.append(exp_date)
-    print(epps_to_expire)
     return epps_to_expire
 
 def epp_new(request):
@@ -65,7 +64,6 @@ def epp_new(request):
         epp_form = New_epp(request.POST)
         # Validations
         if epp_form.is_valid():
-            # TODO add next inspection date to DB
             nepp_type=epp_form.cleaned_data["epp_type"]
             nepp_serial_n=epp_form.cleaned_data["epp_serial_n"]
             nepp_manufacturer=epp_form.cleaned_data["epp_manufacturer"]
@@ -113,6 +111,18 @@ def epp_type(request):
     return render(request, 'epp/alta_EPPtype.html', context)
 
 
-def epp_detail(request):
-
+def epp_detail(request, id):
+    epp = get_object_or_404(Epp,id=id)
+    context={"epp":epp}
     return render(request, 'epp/detail_EPP.html', context)
+
+def epp_update(request, id):
+    epp = Epp.objects.get(id=id)
+    form_epp = New_epp(request.POST or None, instance=epp)
+    if form_epp.is_valid():
+        form_epp.save()
+        messages.add_message(request, messages.SUCCESS,
+                                'El EPP fue cargado correctamente')
+        return redirect("/epp/epp_list")
+    context={"epp":epp, "form_epp":form_epp }
+    return render(request, 'epp/update_EPP.html', context)

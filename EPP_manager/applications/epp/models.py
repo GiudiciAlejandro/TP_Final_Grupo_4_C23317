@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from datetime import date, timedelta, datetime
 from applications.empleados.models import Worker
 
@@ -19,6 +20,9 @@ class Epp(models.Model):
     on_delete=models.DO_NOTHING, related_name="worker_related", null=True, blank=True)
     epp_next_insp_date=models.DateField(verbose_name="Fecha proxima inspección", default='1900-01-01')
 
+    def get_absolute_url(self):
+        return reverse("epp_detail",  args=[str(self.id)])
+    
 
 class Epp_inspections(models.Model):
     epp_inps_epp=models.ForeignKey(Epp, on_delete=models.CASCADE, related_name="epp_related")
