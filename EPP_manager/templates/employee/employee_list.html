@@ -24,47 +24,46 @@
   <main class=main_resumen>
     <div class="row">
       {% for empl in empleados %}
-      <!--Repeat for every employee-->
-      <div class="col-6">
-        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
-        <div class="row">
-          <div class="col-4">
-            <h5><span class="badge bg-secondary w-100">Name </span></h5>
-            <h5><span class="badge bg-secondary w-100">Last name </span></h5>
-            <h5><span class="badge bg-secondary w-100">Fecha de nacimiento </span></h5>
-          </div>
-          <div class="col-4">
-            <h5><span class="badge bg-secondary"> <a href={{empl.linkto}}  >{{empl.worker_name}}</a></span></h5>
-            <h5><span class="badge bg-secondary">{{empl.worker_surname}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empl.worker_birthday}}  </span></h5>
+        <!--Repeat for every employee-->
+        <div class="col-6">
+          <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
+          <div class="row">
+            <div class="col-4">
+              <h5><span class="badge bg-secondary w-100">Name </span></h5>
+              <h5><span class="badge bg-secondary w-100">Last name </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de nacimiento </span></h5>
+            </div>
+            <div class="col-4">
+              <h5><span class="badge bg-secondary"> <a href={{empl.linkto}}  >{{empl.worker_name}}</a></span></h5>
+              <h5><span class="badge bg-secondary">{{empl.worker_surname}} </span></h5>
+              <h5><span class="badge bg-secondary">{{empl.worker_birthday}}  </span></h5>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div class="col-6">
-        <h2><span class="badge bg-secondary">EPPs Asignados </span></h2>
-        {% for ep in epps.all %}
-        <!--Repeat for every epp for every employee-->
-         
-              <div class="row">
-                <div class="col-4">
-                  <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
-                  <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
-                  <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                </div>
-                <div class="col-4">
-                  <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
-                  <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
-                  <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
-                </div>
+        
+        <div class="col-6">
+          <h2><span class="badge bg-secondary">EPPs Asignados </span></h2>
+          {% for ep in epps.all %}
+            <!--Repeat for every epp for every employee-->
+            <div class="row">
+              <div class="col-4">
+                <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+                <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+                <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
               </div>
-              {% empty %}
-              <p  class="textos">No existen EPPs cargados en la base de datos</p>
-        {% endfor %}
-      </div>
-      <hr class="textos" size="2px"/> 
-      {% empty %}
-        <p  class="textos">No existen empleados cargados en la base de datos</p>
+              <div class="col-4">
+                <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
+                <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
+                <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
+              </div>
+            </div>
+                {% empty %}
+                <p  class="textos">No existen EPPs cargados en la base de datos</p>
+          {% endfor %}
+        </div>
+        <hr class="textos" size="2px"/> 
+        {% empty %}
+          <p  class="textos">No existen empleados cargados en la base de datos</p>
       {% endfor %}
     <div> 
   </main>

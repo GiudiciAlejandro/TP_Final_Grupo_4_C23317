@@ -7,5 +7,6 @@ urlpatterns = [
     path('epp_type/', views.epp_type, name='epp_type'), # Add an epp type to the DB
     path('epp_detail/<int:id>', views.epp_detail, name='epp_detail'),
     path('epp_update/<int:id>', views.epp_update, name='epp_update'),
+    path('insp_new/', views.insp_new, name='insp_new'),
 
 ]

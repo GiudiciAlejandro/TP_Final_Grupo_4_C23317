@@ -20,14 +20,16 @@ class Epp(models.Model):
     on_delete=models.DO_NOTHING, related_name="worker_related", null=True, blank=True)
     epp_next_insp_date=models.DateField(verbose_name="Fecha proxima inspección", default='1900-01-01')
 
+    def __str__(self):
+        return f"Tipo: {self.epp_type.epp_type_name} -- S/N: {self.epp_serial_n}" 
+
     def get_absolute_url(self):
         return reverse("epp_detail",  args=[str(self.id)])
     
 
 class Epp_inspections(models.Model):
     epp_inps_epp=models.ForeignKey(Epp, on_delete=models.CASCADE, related_name="epp_related")
-    epp_insp_date=models.DateField(verbose_name="Fecha")
+    epp_insp_date=models.DateField(auto_now_add=True,verbose_name="Fecha")
     epp_insp_comments=models.TextField(verbose_name="Comentarios", max_length=500)
-    epp_insp_status=models.BooleanField(verbose_name="Resultado")
-    epp_insp_next_insp=models.DateField(verbose_name="Proxima inspección")
+    epp_insp_status=models.TextField(verbose_name="Resultado")
     

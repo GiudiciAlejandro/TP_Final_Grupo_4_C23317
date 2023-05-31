@@ -33,8 +33,6 @@
         </div>
         <div class="col-4">
           <a href="{% url 'epp_update' epp.id %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Modificar datos del EPP</a>
-          <form action="" method="post" class="form-control-sm campos_form">
-            {% csrf_token %}
             <div>
                 <p class="textos">Tipo: {{epp.epp_type}} </p>
             </div>
@@ -48,11 +46,59 @@
               <p class="textos">Fecha de reemplazo: {{epp.epp_expire_date}} </p>
             </div>
             <div>
+              <p class="textos">Fecha próxima inspección: {{epp.epp_next_insp_date}} </p>
+            </div>
+            <div>
               <p class="textos">Empleado: {{epp.epp_assigned}} </p>
             </div>
-           
-            {% comment %} <button type="submit" class="btn btn-primary">Cargar datos</button> {% endcomment %}
-          </form>
+          <section>
+            <h3>Inspecciones</h3>
+            {% for insp_list in epp_insp %} 
+              {% for insp in insp_list %} 
+                <div>
+                  <p class="textos">Fecha: {{insp.epp_insp_date}} </p>
+                </div>
+                <div>
+                  <p class="textos">Comentarios: {{insp.epp_insp_comments}} </p>
+                </div>
+                <div>
+                  <p class="textos">Resultado de la inspección: {{insp.epp_insp_status}} </p>
+                </div>
+                {% empty %}
+                <p  class="textos">No existen inspecciones cargadas para este EPP</p>
+              {% endfor %}
+            {% endfor %}
+            <form action="" method="post" class="form-control-sm campos_form">
+              {% comment %} Form to load a new inspection {% endcomment %}
+              <h2>Cargar nueva inspección</h2>
+              {% csrf_token %}
+              {{ new_insp_form.non_field_errors }}
+              {{ new_insp_form.errors }}
+              <div class="fieldWrapper">
+                {{ new_insp_form.epp_inps_epp.errors }}
+                <p class="textos">{{ new_insp_form.epp_inps_epp.label_tag }} </p>
+                <p class="entradas"> {{new_insp_form.epp_inps_epp}} </p>
+            </div>
+            <div class="fieldWrapper">
+              {{ new_insp_form.epp_insp_date.errors }}
+              <p class="textos">{{ new_insp_form.epp_insp_date.label_tag }} </p>
+              <p class="entradas"> {{new_insp_form.epp_insp_date}} </p>
+            </div>
+              <div class="fieldWrapper">
+                  {{ new_insp_form.epp_insp_comments.errors }}
+                  <p class="textos">{{ new_insp_form.epp_insp_comments.label_tag }} </p>
+                  <p class="entradas"> {{new_insp_form.epp_insp_comments}} </p>
+              </div>
+              <div class="fieldWrapper">
+                {{ new_insp_form.epp_insp_status.errors }}
+                <p class="textos">{{ new_insp_form.epp_insp_status.label_tag }} </p>
+                <p class="entradas"> {{new_insp_form.epp_insp_status}} </p>
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Cargar datos inspección</button>
+            </form>
+          </section> 
+          
         </div>
         
       </div>

@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from datetime import date, timedelta, datetime
-from .forms import New_epp, New_epptype
+from .forms import New_epp, New_epptype, New_insp
 from applications.empleados.models import Worker
 from .models import *
 
@@ -111,10 +111,39 @@ def epp_type(request):
     return render(request, 'epp/alta_EPPtype.html', context)
 
 
-def epp_detail(request, id):
+"""def epp_detail(request, id):
     epp = get_object_or_404(Epp,id=id)
     context={"epp":epp}
+    return render(request, 'epp/detail_EPP.html', context)"""
+
+
+def epp_detail(request,id):
+    epp = get_object_or_404(Epp,id=id)
+    epp_insp = [Epp_inspections.objects.filter(epp_inps_epp=epp.id)]
+    # Calculate next inspection date to insert in table Epp
+    epp_insp_days=epp.epp_type.epp_type_insp_period
+    epp_next_insp_date=(date.today() + timedelta(days=epp_insp_days)) 
+    if request.method == "POST":
+        new_insp_form = New_insp(request.POST)
+        new_insp_form.epp_insp_date=date.today()
+        #new_insp_form.epp_inps_epp=epp
+        print(epp)
+        if new_insp_form.is_valid():
+            new_insp_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'El tipo de EPP fue cargado correctamente')
+            return redirect("/epp/epp_list")
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 'Error al cargar inspección')
+    else:
+        new_insp_form = New_insp(initial={"epp_inps_epp":epp})
+        #new_insp_form.fields['epp_inps_epp'].readonly = True
+    context={"epp":epp, "epp_insp":epp_insp, "new_insp_form":new_insp_form}
     return render(request, 'epp/detail_EPP.html', context)
+
+
+
 
 def epp_update(request, id):
     epp = Epp.objects.get(id=id)
@@ -126,3 +155,21 @@ def epp_update(request, id):
         return redirect("/epp/epp_list")
     context={"epp":epp, "form_epp":form_epp }
     return render(request, 'epp/update_EPP.html', context)
+
+
+def insp_new(request):
+    if request.method == "POST":
+        insp_form = New_insp(request.POST)
+        # Validations
+        if insp_form.is_valid():
+            insp_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Se ha guardado correctamente la nueva inspección')
+            return redirect("/epp/epp_type")
+        else:
+            messages.add_message(
+                request, messages.ERROR, 'Error al cargar los datos, por favor verifique los mismos e intente nuevamente')
+    else:
+        insp_form = New_insp()
+    context = {'insp_form': insp_form}
+    return render(request, 'epp/insp_new.html', context)

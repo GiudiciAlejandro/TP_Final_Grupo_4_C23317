@@ -42,3 +42,24 @@ class New_epptype(forms.ModelForm):
         if insp_period < 15:
             raise forms.ValidationError('El período de inspección debe ser mayor a los 15 días')
         return insp_period
+
+
+
+class New_insp(forms.ModelForm):
+   
+    class Meta:
+        model=Epp_inspections
+        insp_status = [("REJECTED","Rechazado"),
+                        ("ACEPTED","Aceptado")]
+        fields= "__all__"
+                
+        widgets = {
+                    'epp_insp_status':forms.Select(
+                        choices=insp_status
+                    ,attrs={'class': 'form-control'}),
+                    'epp_insp_comments':forms.Textarea(
+                    attrs={"rows": 5, "cols": 100, 'style': 'resize:none;'})
+
+                    }
+
+

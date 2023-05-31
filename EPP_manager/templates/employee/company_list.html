@@ -53,19 +53,19 @@
                     <p class="entradas"> {{company.company_address}} </p>
                   </div>  
               </div>
-            <div>
-              {% if messages %}
-                {% for message in messages %}
-                  {% if message.tags == 'success' %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      {{ message }}
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
-                      </button>
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            </div>
+              <div>
+                {% if messages %}
+                  {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                        </button>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </div>
             </form>
             <section class="listado">
               {% for comp in company %}
