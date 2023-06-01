@@ -125,7 +125,6 @@ def epp_detail(request,id):
     epp_next_insp_date=(date.today() + timedelta(days=epp_insp_days)) 
     if request.method == "POST":
         new_insp_form = New_insp(request.POST)
-        new_insp_form.epp_insp_date=date.today()
         #new_insp_form.epp_inps_epp=epp
         print(epp)
         if new_insp_form.is_valid():
@@ -137,8 +136,10 @@ def epp_detail(request,id):
             messages.add_message(request, messages.ERROR,
                                  'Error al cargar inspección')
     else:
-        new_insp_form = New_insp(initial={"epp_inps_epp":epp})
-        #new_insp_form.fields['epp_inps_epp'].readonly = True
+        new_insp_form = New_insp()
+        new_insp_form.epp_insp_date=date.today()
+        new_insp_form.fields['epp_inps_epp'].initial = epp.id
+        #new_insp_form.fields['epp_inps_epp'].readonly = 'readonly'
     context={"epp":epp, "epp_insp":epp_insp, "new_insp_form":new_insp_form}
     return render(request, 'epp/detail_EPP.html', context)
 

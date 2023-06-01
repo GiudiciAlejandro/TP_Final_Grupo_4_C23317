@@ -46,20 +46,18 @@ class New_epptype(forms.ModelForm):
 
 
 class New_insp(forms.ModelForm):
-   
+
     class Meta:
         model=Epp_inspections
         insp_status = [("REJECTED","Rechazado"),
                         ("ACEPTED","Aceptado")]
-        fields= "__all__"
-                
+        fields= ["epp_insp_status", "epp_insp_comments" ,"epp_inps_epp"]
         widgets = {
                     'epp_insp_status':forms.Select(
                         choices=insp_status
                     ,attrs={'class': 'form-control'}),
                     'epp_insp_comments':forms.Textarea(
-                    attrs={"rows": 5, "cols": 100, 'style': 'resize:none;'})
-
-                    }
-
+                    attrs={"rows": 5, "cols": 100, 'style': 'resize:none;'}),
+                    'epp_inps_epp':forms.TextInput(attrs={'readonly':'readonly'})
+                    }   
 

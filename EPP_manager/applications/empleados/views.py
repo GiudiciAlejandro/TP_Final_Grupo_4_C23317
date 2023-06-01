@@ -17,7 +17,6 @@ def employee_lits(request):
     context = {}
     employees = Worker.objects.all()
     epp_list= Epp.objects.exclude(epp_assigned__isnull=True)
-    print(epp_list[0].epp_manufacturer)
     #exclude(epp_assigned__isnull=True).exclude(epp_assigned__exact="")
     context["empleados"] = employees
     context["epps"] = epp_list

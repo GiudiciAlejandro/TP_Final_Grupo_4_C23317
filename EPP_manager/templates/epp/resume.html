@@ -25,64 +25,57 @@
 
 {% block contenido %} 
 <main class=main_resumen>
-  <div class="row">
+  <section class="row elementos">
     <!--Main button section-->
     <div class="col-4">
-      <div class="row">
-        <div class="col-4">
-          <!-- Free column to free space at left-->
-        </div>
-        <div class="col-6">
-          <div class="indicador">
-            <button type="button" class="btn btn-secondary position-relative" onclick="fn_in_stock()">
-              En stok
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{in_stock_count.0}}
-              </span>
-            </button>
-          </div>
-          <div class="indicador">
-            <button type="button" class="btn btn-secondary position-relative" onclick="fn_assigned()">
-              Asignados
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{assigned.0}}
-              </span>
-            </button>
-          </div>
-          <div class="indicador">
-            <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_inspect()">
-              Proximas inspecciones
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{to_inspect_count}}
-              </span>
-            </button>
-          </div>
-          <div class="indicador">
-            <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_expire()">
-              Próximos a vencer
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{to_expire}}
-              </span>
-            </button>
-          </div>
-          <div class="indicador">
-            <button type="button" class="btn btn-secondary position-relative" onclick="fn_employees()">
-              Total empleados 
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{employe_count.0}} 
-              </span>
-            </button>
-          </div>
-        </div>
+     <div class="indicador">
+        <button type="button" class="btn btn-secondary position-relative" onclick="fn_in_stock()">
+          En stok
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{in_stock_count.0}}
+          </span>
+        </button>
+      </div>
+      <div class="indicador">
+        <button type="button" class="btn btn-secondary position-relative" onclick="fn_assigned()">
+          Asignados
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{assigned.0}}
+          </span>
+        </button>
+      </div>
+      <div class="indicador">
+        <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_inspect()">
+          Proximas inspecciones
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{to_inspect_count}}
+          </span>
+        </button>
+      </div>
+      <div class="indicador">
+        <button type="button" class="btn btn-secondary position-relative" onclick="fn_to_expire()">
+          Próximos a vencer
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{to_expire}}
+          </span>
+        </button>
+      </div>
+      <div class="indicador">
+        <button type="button" class="btn btn-secondary position-relative" onclick="fn_employees()">
+          Total empleados 
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{employe_count.0}} 
+          </span>
+        </button>
       </div>
     </div>
       <!-- Right section to show detail for every button -->
     
-      <div class="col-4 resumen" id="div_in_stock">
-        <div  id="in_stock"> 
+      <div class="col-4" id="div_in_stock">
+        <div  id="in_stock" class=main_resumen> 
           {% for ep in in_stock %}
             {% for ep_in_stock in ep %}
-              <div class="row">
+              <div class="row elementos">
                 <div class="col-6">
                   <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                   <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
@@ -94,7 +87,7 @@
                   <h5><span class="badge bg-secondary">{{ep_in_stock.epp_manufacturer}} </span></h5>
                 </div>
               </div>
-              <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+              <hr class="textos" size="2px"/> 
             {% endfor%}
           {% endfor%}
         </div>
@@ -104,21 +97,21 @@
         <div  id="assigned"> 
           {% for epps in epps_employee %}
             {% for assig in epps %}
-            <div class="row">
-              <div class="col-6">
-                <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
-                <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-                <h5><span class="badge bg-secondary w-100">Empleado </span></h5>
+              <div class="row elementos">
+                <div class="col-6">
+                  <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+                  <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+                  <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                  <h5><span class="badge bg-secondary w-100">Empleado </span></h5>
+                </div>
+                <div class="col-6">
+                  <h5><span class="badge bg-secondary">{{assig.epp_type}}</span></h5>
+                  <h5><span class="badge bg-secondary"> <a href="{{assig.get_absolute_url}}">{{assig.epp_serial_n}} </a>  </span></h5>
+                  <h5><span class="badge bg-secondary">{{assig.epp_manufacturer}} </span></h5>
+                  <h5><span class="badge bg-secondary">{{assig.epp_assigned.worker_surname}} </span></h5>
+                </div>
               </div>
-              <div class="col-6">
-                <h5><span class="badge bg-secondary">{{assig.epp_type}}</span></h5>
-                <h5><span class="badge bg-secondary"> <a href="{{assig.get_absolute_url}}">{{assig.epp_serial_n}} </a>  </span></h5>
-                <h5><span class="badge bg-secondary">{{assig.epp_manufacturer}} </span></h5>
-                <h5><span class="badge bg-secondary">{{assig.epp_assigned.worker_surname}} </span></h5>
-              </div>
-            </div>
-            <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+              <hr class="textos" size="2px"/> 
             {% endfor%}
           {% endfor%}
         </div>
@@ -128,7 +121,7 @@
       <div class="col-4 resumen" id="div_to_expire">
         <div  id="to_expire"> 
           {% for exp in epps_to_expire %}
-            <div class="row">
+            <div class="row elementos">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
@@ -144,7 +137,7 @@
                 <h5><span class="badge bg-secondary">{{exp.epp_assigned.worker_surname}} </span></h5>
               </div>
             </div>
-          <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+            <hr class="textos" size="2px"/> 
           {% endfor%}
         </div>
       </div>
@@ -152,7 +145,7 @@
       <div class="col-4 resumen" id="div_to_inspect">
         <div id="to_inspect">
           {% for insp in epps_to_inspect %}
-            <div class="row">
+            <div class="row elementos">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
                 <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
@@ -168,7 +161,7 @@
                 <h5><span class="badge bg-secondary">{{insp.epp_assigned.worker_surname}} </span></h5>
               </div>
             </div>
-          <p class="textos"><b>---------------------------------------------------------------------- </b>  </p>
+            <hr class="textos" size="2px"/> 
           {% endfor%}
         </div>
       </div>
@@ -176,7 +169,7 @@
       <div class="col-4 resumen" id="div_employees">
         <div id="employees">
           {% for empl in employees %}
-            <div class="row">
+            <div class="row elementos">
               <div class="col-6">
                 <h5><span class="badge bg-secondary w-100">Nombre </span></h5>
                 <h5><span class="badge bg-secondary w-100">Apellido </span></h5>
@@ -186,11 +179,11 @@
                 <h5><span class="badge bg-secondary">{{empl.worker_surname}}  </span></h5>
               </div>
             </div>
-          <p class="textos">><b>---------------------------------------------------------------------- </b>  </p>
+            <hr class="textos" size="2px"/> 
           {% endfor%}
         </div>
       </div>
-  </div> 
+    </section> 
 </main>
 {% endblock %}
   

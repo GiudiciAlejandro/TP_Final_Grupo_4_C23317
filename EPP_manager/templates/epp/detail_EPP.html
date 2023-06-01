@@ -23,7 +23,7 @@
 {% block page_title %} Detalle de EPP {% endblock %}
 {% block contenido %} 
 <main class=main_resumen>
-  <div class="row">
+  <div class="row elementos">
     <!--Main button section-->
     <div class="col-10">
       <div class="row">
@@ -64,8 +64,10 @@
                 <div>
                   <p class="textos">Resultado de la inspección: {{insp.epp_insp_status}} </p>
                 </div>
+                <hr class="textos" size="2px"/> 
                 {% empty %}
                 <p  class="textos">No existen inspecciones cargadas para este EPP</p>
+                <hr class="textos" size="2px"/> 
               {% endfor %}
             {% endfor %}
             <form action="" method="post" class="form-control-sm campos_form">
@@ -74,15 +76,8 @@
               {% csrf_token %}
               {{ new_insp_form.non_field_errors }}
               {{ new_insp_form.errors }}
-              <div class="fieldWrapper">
-                {{ new_insp_form.epp_inps_epp.errors }}
-                <p class="textos">{{ new_insp_form.epp_inps_epp.label_tag }} </p>
+            <div class="fieldWrapper" style="visibility:hidden">
                 <p class="entradas"> {{new_insp_form.epp_inps_epp}} </p>
-            </div>
-            <div class="fieldWrapper">
-              {{ new_insp_form.epp_insp_date.errors }}
-              <p class="textos">{{ new_insp_form.epp_insp_date.label_tag }} </p>
-              <p class="entradas"> {{new_insp_form.epp_insp_date}} </p>
             </div>
               <div class="fieldWrapper">
                   {{ new_insp_form.epp_insp_comments.errors }}
