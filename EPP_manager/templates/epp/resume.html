@@ -94,7 +94,7 @@
       </div>
 
       <div class="col-4 resumen" id="div_assigned">
-        <div  id="assigned"> 
+        <div  id="assigned" class=main_resumen>  
           {% for epps in epps_employee %}
             {% for assig in epps %}
               <div class="row elementos">
@@ -119,7 +119,7 @@
 
 
       <div class="col-4 resumen" id="div_to_expire">
-        <div  id="to_expire"> 
+        <div  id="to_expire" class=main_resumen>  
           {% for exp in epps_to_expire %}
             <div class="row elementos">
               <div class="col-6">
@@ -143,7 +143,7 @@
       </div>
 
       <div class="col-4 resumen" id="div_to_inspect">
-        <div id="to_inspect">
+        <div id="to_inspect" class=main_resumen> 
           {% for insp in epps_to_inspect %}
             <div class="row elementos">
               <div class="col-6">
@@ -167,7 +167,7 @@
       </div>
 
       <div class="col-4 resumen" id="div_employees">
-        <div id="employees">
+        <div id="employees" class=main_resumen> 
           {% for empl in employees %}
             <div class="row elementos">
               <div class="col-6">

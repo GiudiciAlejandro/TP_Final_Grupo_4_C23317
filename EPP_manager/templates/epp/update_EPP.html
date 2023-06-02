@@ -20,7 +20,7 @@
 
 {% endblock %}
 
-{% block page_title %} Ingreso nuevo EPP {% endblock %}
+{% block page_title %} Actualizar datos del EPP {% endblock %}
 {% block contenido %} 
 <main class=main_resumen>
   <div class="row">
@@ -64,6 +64,19 @@
            
             <button type="submit" class="btn btn-primary">Actualizar datos</button>
           </form>
+          <div>
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'success' %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                    </button>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
         </div>
         
       </div>

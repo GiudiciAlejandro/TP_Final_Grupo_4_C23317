@@ -22,59 +22,60 @@
   <!--Caja-->
   {% block contenido %} 
   <main class=main_resumen>
-    <div class="row">
+    <div class="row elementos">
       <div class="col-4">
-        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
+        <h2><span class="badge bg-secondary">Datos del empl </span></h2>
         <div class="row">
           <div class="col-4">
             <h5><span class="badge bg-secondary w-100">Name </span></h5>
             <h5><span class="badge bg-secondary w-100">Last name </span></h5>
-            <h5><span class="badge bg-secondary w-100">Edad  </span></h5>
+            <h5><span class="badge bg-secondary w-100">Fecha de nacimiento  </span></h5>
             <h5><span class="badge bg-secondary w-100">Nacionalidad  </span></h5>
             <h5><span class="badge bg-secondary w-100">Compañia </span></h5>
             <h5><span class="badge bg-secondary w-100">Tipo de documento  </span></h5>
             <h5><span class="badge bg-secondary w-100">N° de documento </span></h5>
             <h5><span class="badge bg-secondary w-100">email  </span></h5>
             <h5><span class="badge bg-secondary w-100">Estado  </span></h5>
-            <button type="button" class="btn btn-primary position-relative" onclick="">
-              Asignar nuevo EPP
-            </button>
+            <h5><span class="badge bg-secondary w-100">Comentarios  </span></h5>
           </div>
           <div class="col-4">
-            <h5><span class="badge bg-secondary">{{empleado.first_name}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.last_name}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.age}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.nacionality}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.company}} </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.document_type}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.document_number}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.email}}  </span></h5>
-            <h5><span class="badge bg-secondary">{{empleado.status}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_name}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_surname}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_birthday}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_nationality}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_company}} </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_doc_type}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_doc_n}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_email}}  </span></h5>
+            <h5><span class="badge bg-secondary">{{empl.worker_state}}  </span></h5>
+            <h5><span class="badge bg-secondary"> {{empl.worker_comments}} </span></h5>
           </div>
         </div>
+        <a href="{% url 'employee_update' empl.id %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Modificar datos del empleado</a>
       </div>
 
       <div class="col-4">
         <h2><span class="badge bg-secondary">EPPs Asignados</span></h2>
-        {% for ep in epps %}
+        {% for epp in empl_epp %}
           <div class="row">
             <div class="col-4">
               <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
               <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
               <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
-              <h5><span class="badge bg-secondary w-100">Fecha de entrega  </span></h5>
+              <h5><span class="badge bg-secondary w-100">Fecha de vencimiento  </span></h5>
+              <h5><span class="badge bg-secondary w-100">Proxima inspección  </span></h5>
             </div>
             <div class="col-4">
-              <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
-              <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
-              <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
-              <h5><span class="badge bg-secondary">{{ep.asign_date}} </span></h5>
+              <h5><span class="badge bg-secondary">{{epp.epp_type}}</span></h5>
+              <h5><span class="badge bg-secondary"><a href="{{epp.get_absolute_url}}">{{epp.epp_serial_n}} </a>   </span></h5>
+              <h5><span class="badge bg-secondary">{{epp.epp_manufacturer}} </span></h5>
+              <h5><span class="badge bg-secondary">{{epp.epp_expire_date}} </span></h5>
+              <h5><span class="badge bg-secondary">{{epp.epp_next_insp_date}} </span></h5>
             </div>
-            <button type="button" class="btn btn-danger position-relative" onclick="">
-              Desasignar EPP
-            </button>
           </div>
-          <p class="textos"><b>---------------------------------------------------------------------------------------------- </b>  </p>
+          <hr class="textos" size="2px"/> 
+          {% empty %}
+          <p  class="textos">No existen EPPs asignados a este trabajador</p>
         {% endfor%}
       </div>
     <div> 

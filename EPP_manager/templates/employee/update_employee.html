@@ -13,7 +13,6 @@
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
 <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
-<li><a class="dropdown-item"  href="{% url 'company_new' %}">Agregar empresa</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
 <li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
@@ -21,7 +20,7 @@
 
 {% endblock %}
 
-{% block page_title %} Ingreso nuevo empleado {% endblock %}
+{% block page_title %} Datos del empleado {% endblock %}
 {% block contenido %} 
 <main class=main_resumen>
   <div class="row elementos">
@@ -65,7 +64,7 @@
                 <div class="fieldWrapper">
                   {{ form_new_employee.worker_birthday.errors }}
                   <p class="textos">{{ form_new_employee.worker_birthday.label_tag }} </p>
-                  <p class="entradas"><input type = 'date' value= {{form_new_employee.worker_birthday}}> </p>
+                  <p class="entradas"> {{form_new_employee.worker_birthday}} </p>
                 </div>
                 <div class="fieldWrapper">
                   {{ form_new_employee.worker_company.errors }}

@@ -125,8 +125,6 @@ def epp_detail(request,id):
     epp_next_insp_date=(date.today() + timedelta(days=epp_insp_days)) 
     if request.method == "POST":
         new_insp_form = New_insp(request.POST)
-        #new_insp_form.epp_inps_epp=epp
-        print(epp)
         if new_insp_form.is_valid():
             new_insp_form.save()
             messages.add_message(request, messages.SUCCESS,
@@ -139,7 +137,6 @@ def epp_detail(request,id):
         new_insp_form = New_insp()
         new_insp_form.epp_insp_date=date.today()
         new_insp_form.fields['epp_inps_epp'].initial = epp.id
-        #new_insp_form.fields['epp_inps_epp'].readonly = 'readonly'
     context={"epp":epp, "epp_insp":epp_insp, "new_insp_form":new_insp_form}
     return render(request, 'epp/detail_EPP.html', context)
 
@@ -152,7 +149,7 @@ def epp_update(request, id):
     if form_epp.is_valid():
         form_epp.save()
         messages.add_message(request, messages.SUCCESS,
-                                'El EPP fue cargado correctamente')
+                                'El EPP fue actualizado correctamente')
         return redirect("/epp/epp_list")
     context={"epp":epp, "form_epp":form_epp }
     return render(request, 'epp/update_EPP.html', context)

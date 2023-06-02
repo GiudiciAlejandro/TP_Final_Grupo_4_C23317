@@ -34,8 +34,8 @@
               <h5><span class="badge bg-secondary w-100">Fecha de nacimiento </span></h5>
             </div>
             <div class="col-4">
-              <h5><span class="badge bg-secondary"> <a href={{empl.linkto}}  >{{empl.worker_name}}</a></span></h5>
-              <h5><span class="badge bg-secondary">{{empl.worker_surname}} </span></h5>
+              <h5><span class="badge bg-secondary"> {{empl.worker_name}}</span></h5>
+              <h5><span class="badge bg-secondary"><a href="{{empl.get_absolute_url}}">{{empl.worker_surname}} </a>  </span></h5>
               <h5><span class="badge bg-secondary">{{empl.worker_birthday}}  </span></h5>
             </div>
           </div>
@@ -43,22 +43,24 @@
         
         <div class="col-6">
           <h2><span class="badge bg-secondary">EPPs Asignados </span></h2>
-          {% for ep in epps.all %}
-            <!--Repeat for every epp for every employee-->
-            <div class="row">
-              <div class="col-4">
-                <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
-                <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
-                <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+          {% for ep in epps %}
+            {% if ep.epp_assigned == empl %}
+              <!--Repeat for every epp for every employee-->
+              <div class="row">
+                <div class="col-4">
+                  <h5><span class="badge bg-secondary w-100">Tipo de EPP </span></h5>
+                  <h5><span class="badge bg-secondary w-100">N° de serie </span></h5>
+                  <h5><span class="badge bg-secondary w-100">Fabricante </span></h5>
+                </div>
+                <div class="col-4">
+                  <h5><span class="badge bg-secondary">{{ep.epp_type}}</span></h5>
+                  <h5><span class="badge bg-secondary">{{ep.epp_serial_n}}  </span></h5>
+                  <h5><span class="badge bg-secondary">{{ep.epp_manufacturer}} </span></h5>
+                </div>
               </div>
-              <div class="col-4">
-                <h5><span class="badge bg-secondary">{{ep.type}}</span></h5>
-                <h5><span class="badge bg-secondary">{{ep.serial_number}}  </span></h5>
-                <h5><span class="badge bg-secondary">{{ep.manufacturer}} </span></h5>
-              </div>
-            </div>
-                {% empty %}
-                <p  class="textos">No existen EPPs cargados en la base de datos</p>
+            {% endif %}
+            {% empty %}
+            <p  class="textos">No existen EPPs cargados en la base de datos</p>
           {% endfor %}
         </div>
         <hr class="textos" size="2px"/> 

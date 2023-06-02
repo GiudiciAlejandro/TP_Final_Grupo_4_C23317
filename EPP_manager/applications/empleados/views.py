@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from django.contrib import messages
@@ -24,48 +24,42 @@ def employee_lits(request):
 
 
 
-def employee_details(request, employee):
+def employee_details(request, id):
     # Show details for specific employee
-    # If logged user is admin, it will show a menu to manage employee :
-    # delete employee
-    # assign EPP
-    # deasign EPP
-    # go to EPP inspection page
-    # If logged user is employee, only have the option to ask for a new EPP or report a damaged EPP
-    employee_1 = {
-        'first_name': 'Pedro',
-        'last_name': 'Del Cerro',
-        'age': 35,
-        'nacionality': 'Argentino',
-        'company': 'company1',
-        'document_type': 'passport',
-        'document_number': '123456789',
-        'email': 'ale@gmail.com',
-        'status': 'Active',
-        'coment': 'Perosna medio loca',
-    }
-
-    context = {"empleado": employee_1,
-             "epps": epp_1}
+    empl = get_object_or_404(Worker,id=id)
+    empl_epp = Epp.objects.filter(epp_assigned=empl.id)
+    context={"empl_epp":empl_epp, "empl":empl}
+    print(empl_epp)
     return render(request, 'employee/employee_details.html', context)
+    
 
+
+def employee_update(request, id):
+    empl = Worker.objects.get(id=id)
+    form_empl = Employee_form(request.POST or None, instance=empl)
+    if form_empl.is_valid():
+        form_empl.save()
+        return redirect("/empleados/employee_list/")
+    context={"empl":empl, "form_new_employee":form_empl }
+    return render(request, 'employee/update_employee.html', context)
 
 def employee_new(request):
     # Show the form to load a new employee
+    context = {}
     if request.method == "POST":
         employee_new_form = Employee_form(request.POST)
         # Validaciones
         if employee_new_form.is_valid():
             # Get data from form
-            wname = employee_new_form.cleaned_data["name"]
-            wsname = employee_new_form.cleaned_data["surname"]
-            wcompany = employee_new_form.cleaned_data["company"]
-            wnationality = employee_new_form.cleaned_data["nacionality"]
-            wdoctype = employee_new_form.cleaned_data["document_type"]
-            wdoc_n = employee_new_form.cleaned_data["document_N"]
-            wcomments = employee_new_form.cleaned_data["comments"]
-            wemail = employee_new_form.cleaned_data["email"]
-            wbirthday = employee_new_form.cleaned_data["birthday"]
+            wname = employee_new_form.cleaned_data["worker_name"]
+            wsname = employee_new_form.cleaned_data["worker_surname"]
+            wcompany = employee_new_form.cleaned_data["worker_company"]
+            wnationality = employee_new_form.cleaned_data["worker_nationality"]
+            wdoctype = employee_new_form.cleaned_data["worker_doc_type"]
+            wdoc_n = employee_new_form.cleaned_data["worker_doc_n"]
+            wcomments = employee_new_form.cleaned_data["worker_comments"]
+            wemail = employee_new_form.cleaned_data["worker_email"]
+            wbirthday = employee_new_form.cleaned_data["worker_birthday"]
             
             # Fill table
             # Create new instance of model Worker
