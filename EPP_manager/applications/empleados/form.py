@@ -9,11 +9,11 @@ class Employee_form(forms.ModelForm):
     class Meta:
         model=Worker
         fields="__all__"
-        widgets = {'birthday' : forms.DateInput(
+        widgets = {'worker_birthday' : forms.DateInput(
                     format=('%Y-%m-%d'),
                     attrs={'type': 'date'}),
-                    'comments' : forms.Textarea(
-                    attrs={'rows': 5, "cols": 100, 'style': 'resize:none;'})
+                    'worker_comments' : forms.Textarea(
+                    attrs={'rows': 5, "cols": 120, 'style': 'resize:none;'})
         }
     
     def clean_worker_birthday(self):

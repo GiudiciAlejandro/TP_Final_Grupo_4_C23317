@@ -65,10 +65,10 @@ h3{
   
 .main{
     background: url("../images/Obrero.jpg");
-    background-repeat: no-repeat fixed center;
+    background-repeat: no-repeat fixed top center;
     background-size:cover;
-    width: 100%;
-    height:100%;         
+    width: 100vw;
+    height:100vh;         
     } 
 
 .main2{
@@ -111,7 +111,7 @@ background-color: white;
 
 .message{color: white;
         height: auto;
-        margin-top:25%;
+        margin-top:1px;
         margin-left: auto;
         width: 60%;
         background-color: rgba(26, 73, 92, 0.7) !important;}

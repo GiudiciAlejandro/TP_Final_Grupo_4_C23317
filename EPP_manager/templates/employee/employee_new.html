@@ -26,9 +26,9 @@
 <main class=main_resumen>
   <div class="row elementos">
     <!--Main button section-->
-    <div class="col-10">
+    <div class="col-12">
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <!-- EPPs picture at left-->
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
@@ -65,7 +65,7 @@
                 <div class="fieldWrapper">
                   {{ form_new_employee.worker_birthday.errors }}
                   <p class="textos">{{ form_new_employee.worker_birthday.label_tag }} </p>
-                  <p class="entradas"><input type = 'date' value= {{form_new_employee.worker_birthday}}> </p>
+                  <p class="entradas"> {{form_new_employee.worker_birthday}} </p>
                 </div>
                 <div class="fieldWrapper">
                   {{ form_new_employee.worker_company.errors }}
