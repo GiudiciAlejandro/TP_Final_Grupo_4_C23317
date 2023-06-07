@@ -17,9 +17,16 @@ def employee_lits(request):
     context = {}
     employees = Worker.objects.all()
     epp_list= Epp.objects.exclude(epp_assigned__isnull=True)
-    #exclude(epp_assigned__isnull=True).exclude(epp_assigned__exact="")
-    context["empleados"] = employees
-    context["epps"] = epp_list
+    list_epp = []
+    for empl in employees:
+        list_epp_empl = []
+        for epp in epp_list:
+            if epp.epp_assigned == empl:
+                list_epp_empl.append(epp)
+        list_epp.append({empl:list_epp_empl}) # Create a list with a dict with a employee data and associated epps
+    #context["empleados"] = employees
+    #context["epps"] = epp_list
+    context['empleados'] = list_epp
     return render(request, 'employee/employee_list.html', context)
 
 
