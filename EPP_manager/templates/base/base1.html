@@ -45,6 +45,9 @@
             </li>
           </ul>
         </div>
+        {% if user.is_authenticated %}
+          <p class="textos">User: {{ user.get_username }}</p>
+        {% endif %}
         <div class="btn-group dropstart">
           <button
             type="button"

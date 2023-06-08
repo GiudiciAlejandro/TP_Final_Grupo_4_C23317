@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 from .form import Employee_form, Company_form
@@ -10,7 +11,7 @@ from applications.epp.forms import Epp
 
 # Create your views here.
 
-
+@login_required
 def employee_lits(request):
     # Show a list of all employees names and surname
     # Clicking in one employee open employee_details page
@@ -30,7 +31,7 @@ def employee_lits(request):
     return render(request, 'employee/employee_list.html', context)
 
 
-
+@login_required
 def employee_details(request, id):
     # Show details for specific employee
     empl = get_object_or_404(Worker,id=id)
@@ -40,7 +41,7 @@ def employee_details(request, id):
     return render(request, 'employee/employee_details.html', context)
     
 
-
+@login_required
 def employee_update(request, id):
     empl = Worker.objects.get(id=id)
     form_empl = Employee_form(request.POST or None, instance=empl)
@@ -50,6 +51,9 @@ def employee_update(request, id):
     context={"empl":empl, "form_new_employee":form_empl }
     return render(request, 'employee/update_employee.html', context)
 
+
+
+@login_required
 def employee_new(request):
     # Show the form to load a new employee
     context = {}
@@ -95,6 +99,8 @@ def employee_new(request):
     return render(request, 'employee/employee_new.html', context)
 
 
+
+@login_required
 def companies_list(request):
     # Show a list of all companies
     context = {}
@@ -104,6 +110,8 @@ def companies_list(request):
     return render(request, 'employee/company_list.html', context)
 
 
+
+@login_required
 def company_new(request):
     # Show the form to load a new employee
     if request.method == "POST":

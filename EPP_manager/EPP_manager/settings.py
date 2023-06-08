@@ -136,3 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_URL = 'index'
+LOGIN_REDIRECT_URL ='/epp/epp_list'

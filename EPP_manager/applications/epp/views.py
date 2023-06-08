@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
@@ -8,6 +9,7 @@ from applications.empleados.models import Worker
 from .models import *
 
 
+@login_required
 def epp_list(request):
     in_stock_count = [Epp.objects.filter(epp_assigned__isnull=True).count()]
     in_stock = [Epp.objects.filter(epp_assigned__isnull=True)]
@@ -32,6 +34,7 @@ def epp_list(request):
                 "epps_employee":epps_employee, 
                 "epps_to_expire": epp_to_expire}
     return render(request, 'epp/resume.html', context)
+
 
 def get_next_to_inspect():
     # Get EPP list of epp that inspection date in less than 30 days
@@ -58,6 +61,9 @@ def get_next_to_expire():
             epps_to_expire.append(exp_date)
     return epps_to_expire
 
+
+
+@login_required
 def epp_new(request):
     context = {}
     if request.method == "POST":
@@ -92,7 +98,7 @@ def epp_new(request):
     context = {'form_epp': epp_form}
     return render(request, 'epp/alta_epp.html', context)
 
-
+@login_required
 def epp_type(request):
     if request.method == "POST":
         epptype_form = New_epptype(request.POST)
@@ -116,7 +122,7 @@ def epp_type(request):
     context={"epp":epp}
     return render(request, 'epp/detail_EPP.html', context)"""
 
-
+@login_required
 def epp_detail(request,id):
     epp = get_object_or_404(Epp,id=id)
     epp_insp = [Epp_inspections.objects.filter(epp_inps_epp=epp.id)]
@@ -142,7 +148,7 @@ def epp_detail(request,id):
 
 
 
-
+@login_required
 def epp_update(request, id):
     epp = Epp.objects.get(id=id)
     form_epp = New_epp(request.POST or None, instance=epp)
@@ -154,7 +160,7 @@ def epp_update(request, id):
     context={"epp":epp, "form_epp":form_epp }
     return render(request, 'epp/update_EPP.html', context)
 
-
+@login_required
 def insp_new(request):
     if request.method == "POST":
         insp_form = New_insp(request.POST)
