@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
+from django.contrib.auth import logout
 from django.urls import reverse
 from .forms import Logeo, Contact_form
 
@@ -23,6 +24,11 @@ def login(request):
     return render(request,'index/login.html' , context)
         
         
+def logout_v(request):
+    logout(request)
+    return redirect('/index/login')
+
+
 def contact(request):
     if request.method == "POST":
         contact=Contact_form(request.POST)

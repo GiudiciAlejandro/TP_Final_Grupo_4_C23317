@@ -10,10 +10,13 @@
 {% block menus %}
 <!-- Menu items  -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
-<li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
-<li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+
+{% if request.user.groups.all.0.name == "administrador" %} 
+  <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+  <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
+{% endif %}
+<li><a class="dropdown-item"  href="{% url 'logout' %}">Salir</a></li>
 <li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
 
 {% endblock %}

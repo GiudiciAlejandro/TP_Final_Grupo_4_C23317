@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from datetime import date, timedelta, datetime
+from django.contrib.auth.models import Group
 from .forms import New_epp, New_epptype, New_insp
 from applications.empleados.models import Worker
 from .models import *

@@ -12,10 +12,13 @@
 {% block menus %}
 <!-- Menu items for landing page -->
 <li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
-<li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
 <li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
-<li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
-<li><a class="dropdown-item"  href="{% url 'login' %}">Salir</a></li>
+
+{% if request.user.groups.all.0.name == "administrador" %} 
+  <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+  <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nuevo EPP</a></li>
+{% endif %}
+<li><a class="dropdown-item"  href="{% url 'logout' %}">Salir</a></li>
 <li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
 
 {% endblock %}
@@ -32,7 +35,9 @@
           <img src="{% static 'images/persona_con_epp.PNG' %}" alt="EPPS para un trabajo seguro">
         </div>
         <div class="col-4">
-          <a href="{% url 'epp_update' epp.id %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Modificar datos del EPP</a>
+          {% if request.user.groups.all.0.name == "administrador" %} 
+            <a href="{% url 'epp_update' epp.id %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Modificar datos del EPP</a>
+          {% endif %}
             <div>
                 <p class="textos">Tipo: {{epp.epp_type}} </p>
             </div>
@@ -70,6 +75,7 @@
                 <hr class="textos" size="2px"/> 
               {% endfor %}
             {% endfor %}
+            {% if request.user.groups.all.0.name == "administrador" %} 
             <form action="" method="post" class="form-control-sm campos_form">
               {% comment %} Form to load a new inspection {% endcomment %}
               <h2>Cargar nueva inspección</h2>
@@ -92,6 +98,7 @@
               
               <button type="submit" class="btn btn-primary">Cargar datos inspección</button>
             </form>
+            {% endif %}
           </section> 
           
         </div>
