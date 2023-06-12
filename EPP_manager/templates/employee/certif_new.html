@@ -1,0 +1,78 @@
+
+{% extends 'base/base1.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/resume.css' %}"> 
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block menus %}
+<!-- Menu items for landing page -->
+<li><a class="dropdown-item"  href="{% url 'employee_list' %}">Lista de empleados</a></li>
+<li><a class="dropdown-item"  href="{% url 'epp_list' %}">Listado de EPPs</a></li>
+
+{% if request.user.groups.all.0.name == "administrador" %} 
+  <li><a class="dropdown-item"  href="{% url 'employee_new' %}">Nuevo empleado</a></li>
+  <li><a class="dropdown-item"  href="{% url 'epp_new' %}">Nueva certificación</a></li>
+{% endif %}
+<li><a class="dropdown-item"  href="{% url 'logout' %}">Salir</a></li>
+<li><a class="dropdown-item"  href="{% url 'contact' %}">Contacto</a></li>
+
+{% endblock %}
+
+{% block page_title %} Nueva certificación para trabajos {% endblock %}
+{% block contenido %} 
+<main class=main_resumen>
+  <div class="row elementos">
+    <!--Main button section-->
+    <div class="col-10">
+      <div class="row">
+        <div class="col-4">
+          <!-- EPPs picture at left-->
+          <img src="{% static 'images/certif.PNG' %}" alt="Empresas">
+        </div>
+        <div class="col-8">
+          <form action="" method="POST">
+            <div class="row textos">
+              {% csrf_token %}
+              {{ certif_new_form.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ certif_new_form.certif_name.errors }}
+                    <p class="textos">{{ certif_new_form.certif_name.label_tag }} </p>
+                    <p class="entradas"> {{certif_new_form.certif_name}} </p>
+                </div>
+                <div class="fieldWrapper">
+                  {{ certif_new_form.certif_description.errors }}
+                  <p class="textos">{{ certif_new_form.certif_description.label_tag }} </p>
+                  <p class="entradas"> {{certif_new_form.certif_description}} </p>
+                </div>
+            </div>
+            <!-- boton -->
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-dark btn-lg btn-block " >Cargar datos</button>
+            </div>
+          </form>
+            <div>
+              {% if messages %}
+                {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;
+                      </button>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</main>
+{% endblock %}
+  
+  

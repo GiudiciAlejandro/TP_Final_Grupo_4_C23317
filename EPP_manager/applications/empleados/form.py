@@ -1,6 +1,6 @@
 from django import forms
 from datetime import date, timedelta, datetime
-from .models import Worker, Countries, Company, Doc_types
+from .models import Worker, Countries, Company, Doc_types, Certification
 from django import forms
 
 
@@ -13,9 +13,12 @@ class Employee_form(forms.ModelForm):
                     format=('%Y-%m-%d'),
                     attrs={'type': 'date'}),
                     'worker_comments' : forms.Textarea(
-                    attrs={'rows': 5, "cols": 120, 'style': 'resize:none;'})
+                    attrs={'rows': 5, "cols": 120, 'style': 'resize:none;'}),
+                    'worker_certifications' : forms.ModelMultipleChoiceField(
+                    queryset=worker_certifications.objects.all(),
+                    widget=forms.CheckboxSelectMultiple
+                    ) 
         }
-    
     def clean_worker_birthday(self):
         nacimiento = self.cleaned_data['worker_birthday']
         edad = ((date.today() - nacimiento).days)/365.2425
@@ -51,3 +54,9 @@ class Company_form(forms.Form):
             raise forms.ValidationError(
                 "El nombre debe tener al menos 2 caracteres.")
         return nombre
+
+
+class Certification_form(forms.Form):
+    class Meta:
+        model = Certification
+        fields = "__all__"

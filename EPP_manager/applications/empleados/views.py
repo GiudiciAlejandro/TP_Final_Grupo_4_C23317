@@ -71,6 +71,7 @@ def employee_new(request):
             wcomments = employee_new_form.cleaned_data["worker_comments"]
             wemail = employee_new_form.cleaned_data["worker_email"]
             wbirthday = employee_new_form.cleaned_data["worker_birthday"]
+            wcertif=employee_new_form.cleaned_data["worker_certifications"]
             
             # Fill table
             # Create new instance of model Worker
@@ -85,6 +86,7 @@ def employee_new(request):
                 worker_email = wemail,
                 worker_comments=wcomments,
                 worker_state=True,
+                worker_certifications=wcertif,
             )
             new_employee.save()
             messages.add_message(
@@ -141,3 +143,16 @@ def company_new(request):
         company_new_form = Company_form()
     context = {'form_new_company': company_new_form}
     return render(request, 'employee/company_new.html', context)
+
+
+@login_required
+def certification(request):
+    if request.method == "POST":
+        certif_new_form = Certification_form(request.POST)
+        if certif_new_form.is_valid():
+            certif_new_form.save()
+            return redirect('certification_new')
+        else:  
+            certif_new_form = Certification_form()
+        context = {'certif_new_form': certif_new_form}
+        return render(request, 'employee/certif_new.html', context)

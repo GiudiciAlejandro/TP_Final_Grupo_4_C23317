@@ -34,8 +34,22 @@ class Worker(models.Model):
     worker_email= models.EmailField(verbose_name="email", null=True, blank=True)
     worker_birthday = models.DateField(verbose_name="Fecha de nacimiento", default='1900-01-01')
     worker_comments = models.TextField(verbose_name="Comentarios", max_length=500, null=True, blank=True)
+    worker_certifications = models.ManyToManyField("Certification", verbose_name="Certificaciones",null=True, blank=True, related_name="Certification")
+    
     def __str__(self):
         return (self.worker_surname + ", " + self.worker_name)
 
     def get_absolute_url(self):
         return reverse("employee_details",  args=[str(self.id)])
+
+
+class Certification(models.Model):
+    certif_name=models.CharField(verbose_name="Nombre", max_length=50)
+    certif_description=models.CharField(verbose_name="Decsripción", max_length=255,null=True, blank=True)
+
+    class Meta:
+        ordering = ["certif_name"]
+
+    def __str__(self):
+        return self.certif_name
+    

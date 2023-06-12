@@ -7,6 +7,7 @@ urlpatterns = [
     path('employee_new/', views.employee_new, name='employee_new'),   # Add an employee to the DB
     path('companies_list/', views.companies_list, name='companies_list'),
     path('company_new/', views.company_new, name='company_new'),
-     path('employee_update/<int:id>/', views.employee_update, name='employee_update'),
+    path('employee_update/<int:id>/', views.employee_update, name='employee_update'),
+    path('certification/', views.certification, name='certification'),
 ]
 
