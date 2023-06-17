@@ -59,36 +59,8 @@ def employee_new(request):
     context = {}
     if request.method == "POST":
         employee_new_form = Employee_form(request.POST)
-        # Validaciones
         if employee_new_form.is_valid():
-            # Get data from form
-            wname = employee_new_form.cleaned_data["worker_name"]
-            wsname = employee_new_form.cleaned_data["worker_surname"]
-            wcompany = employee_new_form.cleaned_data["worker_company"]
-            wnationality = employee_new_form.cleaned_data["worker_nationality"]
-            wdoctype = employee_new_form.cleaned_data["worker_doc_type"]
-            wdoc_n = employee_new_form.cleaned_data["worker_doc_n"]
-            wcomments = employee_new_form.cleaned_data["worker_comments"]
-            wemail = employee_new_form.cleaned_data["worker_email"]
-            wbirthday = employee_new_form.cleaned_data["worker_birthday"]
-            wcertif=employee_new_form.cleaned_data["worker_certifications"]
-            
-            # Fill table
-            # Create new instance of model Worker
-            new_employee = Worker(
-                worker_name=wname,
-                worker_surname=wsname,
-                worker_company=wcompany,
-                worker_nationality=wnationality,
-                worker_doc_type=wdoctype,
-                worker_doc_n=wdoc_n,
-                worker_birthday = wbirthday,
-                worker_email = wemail,
-                worker_comments=wcomments,
-                worker_state=True,
-                worker_certifications=wcertif,
-            )
-            new_employee.save()
+            employee_new_form.save()
             messages.add_message(
                 request, messages.SUCCESS, 'Se han cargado correctamente los datos del nuevo empleado')
             return redirect('employee_new')

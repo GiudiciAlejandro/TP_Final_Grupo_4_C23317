@@ -53,3 +53,15 @@ class Certification(models.Model):
     def __str__(self):
         return self.certif_name
     
+
+class worker_certif(models.Model):
+    worker_id=models.ForeignKey(Worker, verbose_name="Empleado", on_delete=models.CASCADE, related_name="Worker_id")
+    certif_if=models.ForeignKey(Certification, verbose_name="Certif", on_delete=models.CASCADE, related_name="Cert_id")
+    certif_expire=models.DateField(verbose_name="Fecha vencimiento")
+
+    class Meta:
+        ordering=["certif_expire"]
+
+    def __str__(self):
+        return str(self.worker_id) + str(self.certif_if) + str(self.certif_expire)
+    

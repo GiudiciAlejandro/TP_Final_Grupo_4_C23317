@@ -14,10 +14,7 @@ class Employee_form(forms.ModelForm):
                     attrs={'type': 'date'}),
                     'worker_comments' : forms.Textarea(
                     attrs={'rows': 5, "cols": 120, 'style': 'resize:none;'}),
-                    'worker_certifications' : forms.ModelMultipleChoiceField(
-                    queryset=worker_certifications.objects.all(),
-                    widget=forms.CheckboxSelectMultiple
-                    ) 
+                    'worker_certifications':forms.CheckboxSelectMultiple()
         }
     def clean_worker_birthday(self):
         nacimiento = self.cleaned_data['worker_birthday']

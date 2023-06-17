@@ -27,7 +27,7 @@
   <main class=main_resumen>
     <div class="row elementos">
       <div class="col-4">
-        <h2><span class="badge bg-secondary">Datos del empl </span></h2>
+        <h2><span class="badge bg-secondary">Datos del empleado </span></h2>
         <div class="row">
           <div class="col-4">
             <h5><span class="badge bg-secondary w-100">Name </span></h5>
@@ -81,7 +81,15 @@
           <hr class="textos" size="2px"/> 
           {% empty %}
           <p  class="textos">No existen EPPs asignados a este trabajador</p>
-        {% endfor%}
+          {% endfor%}
+          <div>
+            <h2><span class="badge bg-secondary">Certificaciones</h2>
+              {% for cert in empl.worker_certifications.all %}
+                <p class="textos"> {{cert}} </p>
+                {% empty %}
+                <p  class="textos">El empleado no posee certificaciones ni entrenamientos</p>
+                {% endfor%}
+          </div>    
       </div>
     <div> 
   </main>
