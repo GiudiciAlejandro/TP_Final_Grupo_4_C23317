@@ -133,7 +133,11 @@ def epp_detail(request,id):
     if request.method == "POST":
         new_insp_form = New_insp(request.POST)
         if new_insp_form.is_valid():
+            if new_insp_form.cleaned_data["epp_insp_status"] == "ACEPTED":
+                epp.epp_next_insp_date=(date.today() + timedelta(days=30))
+                epp.save()
             new_insp_form.save()
+
             messages.add_message(request, messages.SUCCESS,
                                  'El tipo de EPP fue cargado correctamente')
             return redirect("/epp/epp_list")
