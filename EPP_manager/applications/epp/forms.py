@@ -51,7 +51,7 @@ class New_insp(forms.ModelForm):
         model=Epp_inspections
         insp_status = [("REJECTED","Rechazado"),
                         ("ACEPTED","Aceptado")]
-        fields= ["epp_insp_status", "epp_insp_comments" ,"epp_inps_epp"]
+        fields= ["epp_insp_status", "epp_insp_comments" ,"epp_inps_epp",]
         widgets = {
                     'epp_insp_status':forms.Select(
                         choices=insp_status
